@@ -39,7 +39,7 @@ const Statistcs = (props) =>{
             <Statistc text="all" value={all} />
           </tr>
           <tr>
-            <Statistc text="average" value={Math.round(100 * ((good - bad) / all))} percent="true" />
+            <Statistc text="average" value={Math.round(100 *((good - bad) / all))/100}  />
           </tr>
           <tr>
             <Statistc text="positive" value={Math.round(100 * (good / all))} percent="true" />
