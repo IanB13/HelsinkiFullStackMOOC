@@ -71,7 +71,17 @@ if(props.percent === "true"){
 
 }
 
+const Button =(props) =>{
 
+
+  return(
+  <button onClick ={() => props.stateSetter(props.state+1)}>
+  {props.text}
+  </button>
+
+)
+
+}
 
 
 const App = () => {
@@ -84,15 +94,9 @@ const App = () => {
     <>
       <div id = "feedbackbuttons">
         <h1>give feedback</h1>
-        <button onClick ={() => setGood(good+1)}>
-          good
-        </button>
-        <button onClick ={() => setNeutral(neutral+1)}>
-          neutral
-        </button>      
-        <button onClick ={() => setBad(bad+1)}>
-        bad
-        </button>
+        <Button stateSetter ={setGood} state = {good} text = "good"/>
+        <Button stateSetter ={setNeutral} state = {neutral} text = "neutral"/>
+        <Button stateSetter ={setBad} state = {bad} text = "bad"/>
       </div>
       <Statistcs  feedback = {[good,neutral,bad]} />
     </>
