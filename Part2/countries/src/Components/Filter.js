@@ -1,10 +1,10 @@
 import React from 'react'
+import DisplayCountries from './DisplayCountries';
 
 const Filter = (props) => {
 const countries = props.countries;
-const changeFilter = props.changeFilter;
 const typedCountry = props.typedCountry;
-console.log(typedCountry)
+
 
 if(countries.length === 0){
     return(
@@ -16,7 +16,7 @@ if(countries.length === 0){
 else{
 const filteredCountries = countries.filter(country => {
     //console.log(country.name)
-    return country.name.includes(typedCountry);
+    return country.name.toLowerCase().includes(typedCountry.toLowerCase());
    
 })
 
@@ -27,7 +27,7 @@ console.log(filteredCountries)
 
 return(
     <div>
-      hello
+      <DisplayCountries filteredCountries = {filteredCountries} />
     </div>
 )
 }
