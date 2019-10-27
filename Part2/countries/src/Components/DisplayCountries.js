@@ -1,28 +1,28 @@
 import React from 'react'
+import ListCountry from './ListCountry'
+import IndividualCountry from './IndividualCountry';
 
 const DisplayCountries = (props) => {
 
 const CountriesToDisplay = props.filteredCountries;
-//trying to make a mapping function for react componetns, not working
 
-const countryMap = (CountriesToDisplay) =>{CountriesToDisplay.map( countryinfo => {
-   // console.log(countryinfo.name)
- return(
-    <div>
-        {countryinfo.name}
-    </div>
- )
-})};
+if(CountriesToDisplay.length > 10){
+    return(
+        <div>
+            ...TOO many
+        </div>
+    )
 
+}
+else if(CountriesToDisplay.length === 1){
+    return(
+        <IndividualCountry countryInfo = {CountriesToDisplay} />
+    )
+
+}
     return (
         <div>
-            {CountriesToDisplay.map(countryinfo => {
-                return (
-                    <div>
-                        {countryinfo.name}
-                    </div>
-                )
-            })}
+            {CountriesToDisplay.map(countryinfo =>  <ListCountry key = {countryinfo.name} countryInfo = {countryinfo} />)}
         </div>
     )
 
