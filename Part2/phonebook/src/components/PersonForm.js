@@ -1,16 +1,21 @@
 import React from 'react';
+import Axios from 'axios';
 
-
-
-const PersonForm = (props) =>{
+const PersonForm = ({persons,setPersons,...props}) =>{
 
     
-const persons = props.persons;
-const setPersons = props.setPersons;
+//const persons = props.persons;
+//const setPersons = props.setPersons;
 const newName = props.newName;
 const setNewName = props.setNewName;
 const newNumber = props.newNumber ;
 const setNewNumber = props.setNewNumber ;
+
+const create = newObject =>{
+  const request = Axios.post('http://localhost:3001/persons',newObject)
+  return request.then(Response => Response.data)
+
+}
 
 const handleNameChange = (event) => {
     event.preventDefault()
@@ -25,6 +30,7 @@ const addPersontoPhoneBook = (event)=>{
     event.preventDefault()
     if(keyCheck(persons,newName) === false){
     setPersons(persons.concat({name: newName, number: newNumber}));
+    create({name: newName, number: newNumber});
     setNewName(``);
     setNewNumber(``);
 

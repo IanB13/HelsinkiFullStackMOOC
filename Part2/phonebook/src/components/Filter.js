@@ -1,11 +1,7 @@
 import React from 'react';
 
 
-const Filter = (props) => {
-    const newfilter = props.newfilter;
-    const setFilter = props.setFilter;
-    
-
+const Filter = ({newfilter,setFilter}) => {
 
     const handleFilterChange = (event) => {
         event.preventDefault()
