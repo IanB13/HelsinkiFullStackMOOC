@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter';
 import Numbers from'./components/Numbers';
-import Axios from 'axios';
+import Phonebook from './services/phonebook'
+
+
 
 const App = () => {
   const [ persons, setPersons] = useState([]); 
@@ -10,16 +12,16 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('');
   const [newfilter,setFilter] = useState('');
 
-   useEffect( ()=>{
-    Axios.get('http://localhost:3001/persons')
-    .then(
-      response =>{
-        console.log(response)
-        setPersons(response.data)
-      }
-    )
-   },[]) 
 
+   useEffect(  ()  =>{ 
+     async function boi(){
+      const temp = await Phonebook.getPeople();
+      console.log("temp is")
+      console.log(temp)
+      setPersons(temp)
+     }
+     boi()
+   },[])
 
 
 
@@ -39,7 +41,8 @@ const App = () => {
        
       <h2>Numbers</h2>
         <Numbers persons={persons} 
-        filter={newfilter} />
+        filter={newfilter} 
+        setPersons ={setPersons}/>
     </div>
   )
 }

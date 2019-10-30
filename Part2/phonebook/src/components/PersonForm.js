@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+import phonebook from '../services/phonebook';
 
 const PersonForm = ({persons,setPersons,...props}) =>{
 
@@ -11,9 +12,11 @@ const setNewName = props.setNewName;
 const newNumber = props.newNumber ;
 const setNewNumber = props.setNewNumber ;
 
-const create = newObject =>{
+// needs to go in Sevices
+const create = async newObject =>{
   const request = Axios.post('http://localhost:3001/persons',newObject)
-  return request.then(Response => Response.data)
+  const Response = await request;
+  return Response.data;
 
 }
 
@@ -28,7 +31,8 @@ const handleNumberChange = (event) => {
 
 const addPersontoPhoneBook = (event)=>{
     event.preventDefault()
-    if(keyCheck(persons,newName) === false){
+    const MatchPerson = keyCheck(persons,newName);
+    if( MatchPerson === false){
     setPersons(persons.concat({name: newName, number: newNumber}));
     create({name: newName, number: newNumber});
     setNewName(``);
@@ -36,20 +40,25 @@ const addPersontoPhoneBook = (event)=>{
 
     }
     else{
-        window.alert(`${newName} is already added to phonebook`)
+        if(window.confirm(`${newName} is already added to phonebook, change number?`)){
+          console.log(`MatchPerson is:`)
+          console.log(MatchPerson)
+          //phonebook.changeNumber(MatchPerson, newNumber);
+        }
     }
   }
 
 const keyCheck = (Persons,newName) =>{
-    let match = false;
-    Persons.forEach(element => {
-        console.log(element.name)
-        if(element.name === newName){
-            match = true;
-        }
-    });
-    return match;
+    
+    for(const person of Persons){
+      if(person.name === newName){
+        console.log(person) 
+        return person;
+      }
+
+    }
 }
+
 
 
 return(
