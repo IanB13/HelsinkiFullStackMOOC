@@ -3,7 +3,7 @@ import PersonForm from './components/PersonForm'
 import Filter from './components/Filter';
 import Numbers from'./components/Numbers';
 import Phonebook from './services/phonebook'
-
+import './index.css'
 
 
 const App = () => {
@@ -16,8 +16,6 @@ const App = () => {
    useEffect(  ()  =>{ 
      async function boi(){
       const temp = await Phonebook.getPeople();
-      console.log("temp is")
-      console.log(temp)
       setPersons(temp)
      }
      boi()

@@ -12,7 +12,7 @@ const setNewName = props.setNewName;
 const newNumber = props.newNumber ;
 const setNewNumber = props.setNewNumber ;
 
-// needs to go in Sevices
+
 const create = async newObject =>{
   const request = Axios.post('http://localhost:3001/persons',newObject)
   const Response = await request;
@@ -32,18 +32,22 @@ const handleNumberChange = (event) => {
 const addPersontoPhoneBook = (event)=>{
     event.preventDefault()
     const MatchPerson = keyCheck(persons,newName);
-    if( MatchPerson === false){
+    
+    if( MatchPerson === undefined){
     setPersons(persons.concat({name: newName, number: newNumber}));
     create({name: newName, number: newNumber});
     setNewName(``);
     setNewNumber(``);
 
     }
-    else{
+    else {
         if(window.confirm(`${newName} is already added to phonebook, change number?`)){
           console.log(`MatchPerson is:`)
           console.log(MatchPerson)
-          //phonebook.changeNumber(MatchPerson, newNumber);
+          phonebook.changeNumber(MatchPerson, newNumber);
+          const newSet =  persons.map(person => (person.name !==newName)? person :{...person, number: newNumber} )
+          console.log(`new set is:`)
+          setPersons(newSet);
         }
     }
   }
@@ -51,8 +55,7 @@ const addPersontoPhoneBook = (event)=>{
 const keyCheck = (Persons,newName) =>{
     
     for(const person of Persons){
-      if(person.name === newName){
-        console.log(person) 
+      if(person.name === newName){ 
         return person;
       }
 

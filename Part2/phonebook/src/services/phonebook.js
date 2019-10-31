@@ -1,5 +1,6 @@
 import axios from 'axios'
 const baseUrl = 'http://localhost:3001/persons'
+// none of these change state
 
 const getPeople = () =>{
     const get = axios.get(baseUrl)
@@ -20,9 +21,19 @@ const deletePerson = (id,person) =>{
     }
 }
 
+
 const changeNumber =(person,newNumber) =>{
-    axios.post(`${baseUrl}/${person.id}`,{number :person}).then(
-        response => console.log(response)
+    const putUrl = `${baseUrl}/${person.id}`
+    axios.put(putUrl,{...person, number :newNumber, }).then(
+ 
+        response => {
+            console.log(response.data)}
+    )
+    .catch(
+        err =>{
+            console.log(err)
+        }
+
     )
 
 
