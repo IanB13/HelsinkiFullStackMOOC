@@ -27,7 +27,7 @@ console.log(filteredCountries)
 
 return(
     <div>
-      <DisplayCountries filteredCountries = {filteredCountries} />
+      <DisplayCountries filteredCountries = {filteredCountries} changeTypedCountry ={props.changeTypedCountry} />
     </div>
 )
 }

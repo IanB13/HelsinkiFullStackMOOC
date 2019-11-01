@@ -4,11 +4,19 @@ const ListCountry =(props) =>{
 
 const countryInfo = props.countryInfo;
 const countryName = countryInfo.name;
+const changeTypedCountry = props.changeTypedCountry;
 
+const selectCountry = (event) =>{
+    event.preventDefault()
+    changeTypedCountry(countryName)
+}
 
 return(
     <div>
-        {countryName}
+        {countryName} 
+        <button onClick = {selectCountry}>
+            select
+        </button>
     </div>
 )
 }

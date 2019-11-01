@@ -3,7 +3,7 @@ import ListCountry from './ListCountry'
 import IndividualCountry from './IndividualCountry';
 
 const DisplayCountries = (props) => {
-
+    console.log(`in Display Countries  ${props.changeTypedCountry}`)
 const CountriesToDisplay = props.filteredCountries;
 
 if(CountriesToDisplay.length > 10){
@@ -22,7 +22,7 @@ else if(CountriesToDisplay.length === 1){
 }
     return (
         <div>
-            {CountriesToDisplay.map(countryinfo =>  <ListCountry key = {countryinfo.name} countryInfo = {countryinfo} />)}
+            {CountriesToDisplay.map(countryinfo =>  <ListCountry key = {countryinfo.name} countryInfo = {countryinfo}  changeTypedCountry ={props.changeTypedCountry} />)}
         </div>
     )
 

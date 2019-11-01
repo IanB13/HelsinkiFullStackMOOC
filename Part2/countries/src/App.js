@@ -23,7 +23,7 @@ function App() {
   return (
     <div>
     find countries: <SelectCountry typedCountry ={typedCountry} changeTypedCountry = {changeTypedCountry}/>
-    <Filter typedCountry ={typedCountry} countries = {countries}  />
+    <Filter typedCountry ={typedCountry} countries = {countries} changeTypedCountry ={changeTypedCountry} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import Axios from 'axios';
+import DisplayWeather from './DisplayWeather';
 
 const IndividualCountry =(props) =>{
 const CountryInfo = props.countryInfo[0];
@@ -8,7 +9,7 @@ useEffect(() => {
     Axios.get(CountryInfo.flag)
       .then(
         Response => {
-          console.log(Response.data);
+          //console.log(Response.data);
         }
 
       )
@@ -29,16 +30,16 @@ return(
         Population: {CountryInfo.population}
        </div>
         <h2>Languages</h2>
-        <Languages countryInfo = {CountryInfo}/>
+        <Languages CountryInfo = {CountryInfo}/>
         <img src = {CountryInfo.flag} alt ={`The flag of ${CountryInfo.name}`} />
-
+        <DisplayWeather cityName = {CountryInfo.capital} />
     </div>
 )
 
 }
 
-const Languages =(props) =>{
-const CountryInfo = props.countryInfo;
+const Languages =({CountryInfo}) =>{
+
 console.log(`inside language component ${CountryInfo.languages[0].name}`)
 return(
     <ul>
