@@ -11,13 +11,16 @@ const deleteID =(id,name) =>{
     }
 };
 
-const nums =() => persons.map(person =>
+const nums =() => persons.map(person =>{
+    console.log(person.id)
+    return (
     <Number
     key = {person.name}  
     name = {person.name} 
     number ={person.number}
     deleteID = {()=>deleteID(person.id,person.name)}
-    />
+    />)
+}
     )
 
 
@@ -33,6 +36,10 @@ const nums =() => persons.map(person =>
 
 
 const Number =(props)=>{
+    
+   // console.log(props.deleteID)
+   // console.log(props.name)
+   // console.log(props.number)
     return(
         <div>
         {props.name} {props.number} 

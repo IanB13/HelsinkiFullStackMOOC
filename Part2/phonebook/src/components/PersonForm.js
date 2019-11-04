@@ -1,5 +1,4 @@
 import React from 'react';
-import Axios from 'axios';
 import phonebook from '../services/phonebook';
 
 const PersonForm = ({persons,setPersons,...props}) =>{
@@ -12,13 +11,6 @@ const setNewName = props.setNewName;
 const newNumber = props.newNumber ;
 const setNewNumber = props.setNewNumber ;
 
-
-const create = async newObject =>{
-  const request = Axios.post('http://localhost:3001/persons',newObject)
-  const Response = await request;
-  return Response.data;
-
-}
 
 const handleNameChange = (event) => {
     event.preventDefault()
@@ -35,7 +27,7 @@ const addPersontoPhoneBook = (event)=>{
     
     if( MatchPerson === undefined){
     setPersons(persons.concat({name: newName, number: newNumber}));
-    create({name: newName, number: newNumber});
+    phonebook.createPerson({name: newName, number: newNumber});
     setNewName(``);
     setNewNumber(``);
 
@@ -48,6 +40,8 @@ const addPersontoPhoneBook = (event)=>{
           const newSet =  persons.map(person => (person.name !==newName)? person :{...person, number: newNumber} )
           console.log(`new set is:`)
           setPersons(newSet);
+          setNewName(``);
+          setNewNumber(``);      
         }
     }
   }

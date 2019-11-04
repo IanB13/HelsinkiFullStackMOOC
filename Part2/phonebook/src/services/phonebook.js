@@ -2,10 +2,18 @@ import axios from 'axios'
 const baseUrl = 'http://localhost:3001/persons'
 // none of these change state
 
-const getPeople = () =>{
+const getPeople = async () =>{
     const get = axios.get(baseUrl)
-    return get.then(response => response.data)
+    const response = await get
+    return response.data
 }
+
+const createPerson = async newObject =>{
+    const request = axios.post('http://localhost:3001/persons',newObject)
+    const Response = await request;
+    return Response.data;
+  
+  }
 
 const deletePerson = (id,person) =>{
     if (window.confirm(`Are you sure you want to delete ${person}`))
@@ -23,11 +31,13 @@ const deletePerson = (id,person) =>{
 
 
 const changeNumber =(person,newNumber) =>{
+   
     const putUrl = `${baseUrl}/${person.id}`
     axios.put(putUrl,{...person, number :newNumber, }).then(
  
-        response => {
-            console.log(response.data)}
+       response => {
+            console.log(response.data)
+            }
     )
     .catch(
         err =>{
@@ -35,8 +45,8 @@ const changeNumber =(person,newNumber) =>{
         }
 
     )
-
+    
 
 }
 
-export default {getPeople, deletePerson, changeNumber}
+export default {getPeople, deletePerson, changeNumber,createPerson}

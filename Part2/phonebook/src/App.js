@@ -11,6 +11,7 @@ const App = () => {
   const [ newName, setNewName ] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [newfilter,setFilter] = useState('');
+  const[message,setMessage] = useState('');
 
 
    useEffect(  ()  =>{ 
@@ -30,8 +31,9 @@ const App = () => {
 
       <Filter newfilter={newfilter} setFilter={setFilter} />
 
-      <h2>Add a New</h2>
+      <h2>Add a New:</h2>
       <PersonForm
+        message={message} setMessage = {setMessage}
         persons={persons} setPersons={setPersons}
         newName={newName} setNewName={setNewName}
         newNumber={newNumber} setNewNumber={setNewNumber}
