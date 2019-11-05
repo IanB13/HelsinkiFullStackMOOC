@@ -30,7 +30,7 @@ const addPersontoPhoneBook = (event)=>{
     phonebook.createPerson({name: newName, number: newNumber});
     setNewName(``);
     setNewNumber(``);
-
+    props.setMessage(`Added ${newName}`);
     }
     else {
         if(window.confirm(`${newName} is already added to phonebook, change number?`)){
@@ -41,7 +41,8 @@ const addPersontoPhoneBook = (event)=>{
           console.log(`new set is:`)
           setPersons(newSet);
           setNewName(``);
-          setNewNumber(``);      
+          setNewNumber(``);   
+          props.setMessage(`Changed ${MatchPerson.name}'s number to ${newNumber}`);   
         }
     }
   }

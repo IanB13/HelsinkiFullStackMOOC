@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import PersonForm from './components/PersonForm'
+import React, { useState, useEffect } from 'react';
+import PersonForm from './components/PersonForm';
 import Filter from './components/Filter';
 import Numbers from'./components/Numbers';
-import Phonebook from './services/phonebook'
-import './index.css'
+import Message from './components/Message';
+import Phonebook from './services/phonebook';
+import './index.css';
 
 
 const App = () => {
@@ -11,7 +12,14 @@ const App = () => {
   const [ newName, setNewName ] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [newfilter,setFilter] = useState('');
-  const[message,setMessage] = useState('');
+  const[message,setMessage] = useState("No Message");
+
+
+  useEffect( ()=>{
+    const change =() => setMessage("No Message");
+    window.setTimeout(change,5*1000) //5 second Message
+    }
+    ,[persons])
 
 
    useEffect(  ()  =>{ 
@@ -20,7 +28,7 @@ const App = () => {
       setPersons(temp)
      }
      boi()
-   },[])
+   },[message])
 
 
 
@@ -28,12 +36,12 @@ const App = () => {
     <div>
       
       <h2>Phonebook</h2>
-
+      <Message message={message} />
       <Filter newfilter={newfilter} setFilter={setFilter} />
 
       <h2>Add a New:</h2>
       <PersonForm
-        message={message} setMessage = {setMessage}
+        setMessage = {setMessage}
         persons={persons} setPersons={setPersons}
         newName={newName} setNewName={setNewName}
         newNumber={newNumber} setNewNumber={setNewNumber}

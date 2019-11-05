@@ -24,6 +24,11 @@ const deletePerson = (id,person) =>{
         Response =>{
             console.log(Response)
         }
+        
+    ).catch( error=>{
+        console.log(error)
+    }
+        
     )
     return true;
     }
