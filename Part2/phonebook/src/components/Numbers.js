@@ -1,14 +1,28 @@
 import React from 'react'
 import phonebook from '../services/phonebook';
 
-const Numbers = ({setPersons, ...props}) =>{
+
+const Numbers = ({setPersons,setMessage, ...props}) =>{
 const persons = ((props.filter==="")) ? props.persons : props.persons.filter(person => person.name.toLowerCase().includes(props.filter.toLowerCase()))
 
-const deleteID =(id,name) =>{
-    const check = phonebook.deletePerson(id,name)
-    if(check === true){
-    setPersons(persons.filter(person => (person.id !== id)))
+const deleteID = (id,name) =>{
+   
+    phonebook.deletePerson(id,name).then(
+        Response =>{
+            console.log(Response)
+            setPersons(persons.filter(person => (person.id !== id)))
+            setMessage(`${name} succesfully deleted`)
+        }
+        
+    ).catch( error=>{
+        console.log(error)
+        setMessage(`Error: ${name} already deleted`)
     }
+        
+    )
+
+
+    
 };
 
 const nums =() => persons.map(person =>{

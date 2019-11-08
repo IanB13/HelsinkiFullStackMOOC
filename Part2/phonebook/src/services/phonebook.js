@@ -20,19 +20,11 @@ const deletePerson = (id,person) =>{
     {
     const deleteUrl = `${baseUrl}/${id}` ;
     console.log(deleteUrl)
-    axios.delete(deleteUrl).then(
-        Response =>{
-            console.log(Response)
-        }
-        
-    ).catch( error=>{
-        console.log(error)
-    }
-        
-    )
-    return true;
+    return axios.delete(deleteUrl)
+    
     }
 }
+
 
 
 const changeNumber =(person,newNumber) =>{

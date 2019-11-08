@@ -17,7 +17,7 @@ const App = () => {
 
   useEffect( ()=>{
     const change =() => setMessage("No Message");
-    window.setTimeout(change,5*1000) //5 second Message
+    window.setTimeout(change,5*1000)  //5 second Message
     }
     ,[persons])
 
@@ -28,7 +28,7 @@ const App = () => {
       setPersons(temp)
      }
      boi()
-   },[message])
+   },[message,newName])
 
 
 
@@ -50,7 +50,8 @@ const App = () => {
       <h2>Numbers</h2>
         <Numbers persons={persons} 
         filter={newfilter} 
-        setPersons ={setPersons}/>
+        setPersons ={setPersons}
+        setMessage ={setMessage}/>
     </div>
   )
 }
