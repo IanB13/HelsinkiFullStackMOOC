@@ -30,7 +30,7 @@ let notes = [
 
 
 app.get('/', (req,res) =>{
-  res.send('<h1> Landing</h1>')
+  res.send('<h1 style=" color: orange;"> Landing</h1>')
 } )
 
 app.get('/notes', (req, res) => {
@@ -55,6 +55,16 @@ app.delete('/notes/:id', (request, response) => {
   notes = notes.filter(note => note.id !== id)
 
   response.status(204).end()
+})
+
+app.post('/notes', (request, response) => {
+  const note = request.body
+  console.log("Listining to post")
+  console.log(request)
+  console.log(response)
+  console.log(`note is ${request.body}`)
+
+  response.json({"fraud" : 23})
 })
 
 
