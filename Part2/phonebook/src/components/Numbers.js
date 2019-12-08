@@ -26,7 +26,6 @@ const deleteID = (id,name) =>{
 };
 
 const nums =() => persons.map(person =>{
-    console.log(person.id)
     return (
     <Number
     key = {person.name}  

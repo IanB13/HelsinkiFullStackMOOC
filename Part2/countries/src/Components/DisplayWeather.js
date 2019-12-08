@@ -5,7 +5,7 @@ const DisplayWeather =({cityName}) =>{
 const [weather, setWeather] = useState({}) ;
 
 const params = {
-   access_key: 'e2a9082aeab6001ada50ee9c8fb33b2e',
+   access_key: '5b354f5d6c2190f6f2303b841d85beef',
    query : cityName
 
 }

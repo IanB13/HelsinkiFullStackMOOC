@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/persons'
+const baseUrl = 'http://localhost:3001/api/persons'
 // none of these change state
 
 const getPeople = async () =>{
@@ -8,18 +8,16 @@ const getPeople = async () =>{
     return response.data
 }
 
-const createPerson = async newObject =>{
-    const request = axios.post('http://localhost:3001/persons',newObject)
-    const Response = await request;
-    return Response.data;
-  
-  }
+const createPerson =(newObject) =>{
+    return axios.post(baseUrl,newObject)
+}
 
 const deletePerson = (id,person) =>{
     if (window.confirm(`Are you sure you want to delete ${person}`))
     {
     const deleteUrl = `${baseUrl}/${id}` ;
     console.log(deleteUrl)
+    console.log(id)
     return axios.delete(deleteUrl)
     
     }

@@ -5,7 +5,7 @@ const Message =({message}) =>{
 
 if(message ==="No Message"){
 return null}
-else if(message.includes("Error")){
+else if(message.includes("rror")){
     return(
         <div className ="error">
         {message}

@@ -26,11 +26,22 @@ const addPersontoPhoneBook = (event)=>{
     const MatchPerson = keyCheck(persons,newName);
     
     if( MatchPerson === undefined){
-    setPersons(persons.concat({name: newName, number: newNumber}));
-    phonebook.createPerson({name: newName, number: newNumber});
-    setNewName(``);
+    phonebook.createPerson({name: newName, number: newNumber}).then( response =>{
+      setPersons(persons.concat({name: newName, number: newNumber}));
+      setNewName(``);
+      setNewNumber(``);
+      props.setMessage(`Added ${newName}`);
+    }
+    ).catch( err =>{
+      console.log(err.response.data)
+      const errorMessage = JSON.stringify(err.response.data)
+      props.setMessage(errorMessage)
+    }
+    )
+    
+/*     setNewName(``);
     setNewNumber(``);
-    props.setMessage(`Added ${newName}`);
+    props.setMessage(`Added ${newName}`); */
     }
     else {
         if(window.confirm(`${newName} is already added to phonebook, change number?`)){

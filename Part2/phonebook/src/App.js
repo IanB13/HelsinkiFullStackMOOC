@@ -18,16 +18,18 @@ const App = () => {
   useEffect( ()=>{
     const change =() => setMessage("No Message");
     window.setTimeout(change,5*1000)  //5 second Message
+    console.log('set message use effect triggerd')
     }
     ,[persons])
 
 
    useEffect(  ()  =>{ 
-     async function boi(){
-      const temp = await Phonebook.getPeople();
-      setPersons(temp)
+     async function peopleEffect(){
+      const people = await Phonebook.getPeople();
+      setPersons(people)
+      console.log("set persons use effect triggered")
      }
-     boi()
+     peopleEffect()
    },[message,newName])
 
 
