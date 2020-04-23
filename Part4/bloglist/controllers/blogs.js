@@ -1,7 +1,7 @@
 const blogRouter = require('express').Router()
 const Blog = require(`../models/Blog`) //gets moongoose model
 
-blogRouter.get('/api/blogs', (request, response) => {
+blogRouter.get('/', (request, response) => {
     Blog
       .find({})
       .then(blogs => {
