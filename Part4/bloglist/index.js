@@ -7,17 +7,11 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const logger = require('./utils/logger') //logger for adding logging frameworks in the future
 
-const config = require('./utils/config')
+const config = require('./utils/config') //handles .env configuration
 
-// mongoose defined schema
-const blogSchema = mongoose.Schema({
-  title: String,
-  author: String,
-  url: String,
-  likes: Number
-})
-// declaring mongoose schema
-const Blog = mongoose.model('Blog', blogSchema)
+
+const Blog = require('./models/Blog')
+
 
 
 
