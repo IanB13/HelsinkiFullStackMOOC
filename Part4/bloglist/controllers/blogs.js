@@ -1,5 +1,6 @@
 const blogRouter = require('express').Router()
 const Blog = require(`../models/Blog`) //gets moongoose model
+const logger = require('../utils/logger')
 
 blogRouter.get('/', (request, response) => {
     Blog
@@ -19,7 +20,7 @@ blogRouter.post('/', (request, response) => {
       .save()
       .then(result => {
         response.status(201).json(result)
-        console.log(`${result}`)
+        logger.info(`${result}`)
       })
   })
   
