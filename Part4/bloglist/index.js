@@ -1,15 +1,13 @@
-// .env to keep password to mongodb secret
-require('dotenv').config()
-//why do we have this
-const http = require('http')
+require('dotenv').config() // .env to keep password to mongodb secret
+const http = require('http') //why do we have this?
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
-//logger
-const logger = require('./utils/logger')
+const logger = require('./utils/logger') //logger for adding logging frameworks in the future
 
+const config = require('./utils/config')
 
 // mongoose defined schema
 const blogSchema = mongoose.Schema({
@@ -21,15 +19,15 @@ const blogSchema = mongoose.Schema({
 // declaring mongoose schema
 const Blog = mongoose.model('Blog', blogSchema)
 
-// gets mongo password from the .env file
-const mongoUrl = process.env.mongoDB_URL;
 
-mongoose.connect(mongoUrl, { useNewUrlParser: true,useUnifiedTopology: true  }).then(success =>{
-  logger.info(`connected at ${mongoUrl}`)
+
+mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true,useUnifiedTopology: true  }).then(success =>{
+  logger.info(`connected at ${config.MONGODB_URI}`)
 }
 ).catch( err =>{
   logger.error(err)
 })
+
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -54,7 +52,7 @@ app.post('/api/blogs', (request, response) => {
     })
 })
 
-const PORT = 3003
-app.listen(PORT, () => {
-  logger.info(`Server running on port ${PORT}`)
+
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`)
 })
