@@ -80,3 +80,6 @@ describe('total likes', () => {
     })
   })
   
+  describe('favourite blog',()=>{
+
+  })
