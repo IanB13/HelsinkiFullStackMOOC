@@ -1,3 +1,4 @@
+//Intro to testing tests, which aren't used anywhere in the main program, only tests
 const palindrome = (string) => {
     return string
         .split("")

@@ -64,7 +64,7 @@ const favouriteBlog = (blogList) =>{
             favblog = blog
         }
     }
-    console.log(favblog)
+    return favblog
 }
 
 
