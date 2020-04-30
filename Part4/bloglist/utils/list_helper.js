@@ -67,11 +67,73 @@ const favouriteBlog = (blogList) =>{
     return favblog
 }
 
+const mostblog = (bloglist) => {
+    //gets a list of authors, with one instance of the authors name for each blog written
+    const authorlistnum = bloglist.map(blog => blog.author)
+    //gets a list of unique authors
+    const authorlist = Array.from(new Set(authorlistnum))
+    //sets up the object 
+    const authorObject = authorlist.map(author => {
+        return ({ "author": author, blogs: 0 })
+
+    })
+
+    for (author of authorObject) {
+        for (blog of bloglist) {
+            if (blog.author === author.author) {
+                author.blogs += 1;
+            }
+
+        }
+    }
+
+    let mostBlogs = { "author": null, "blogs": 0 }
+    for (author of authorObject) {
+        if (mostBlogs.blogs < author.blogs) {
+            mostBlogs = author
+        }
+    }
+    return mostBlogs
+}
+
+const mostLikes = (bloglist) => {
+    //gets a list of authors, with one instance of the authors name for each blog written
+    const authorlistnum = bloglist.map(blog => blog.author)
+    //gets a list of unique authors
+    const authorlist = Array.from(new Set(authorlistnum))
+    //sets up the object 
+    const authorObject = authorlist.map(author => {
+        return ({ "author": author, likes: 0 })
+
+    })
+
+    for (author of authorObject) {
+        for (blog of bloglist) {
+            if (blog.author === author.author) {
+                author.likes += blog.likes;
+            }
+
+        }
+    }
+
+    let mostLikes = { "author": null, "likes": 0 }
+    for (author of authorObject) {
+        if (mostLikes.likes < author.likes) {
+            mostLikes = author
+        }
+    }
+    return mostLikes
+}
+console.log(mostLikes(blogs))
+
+
 
 module.exports = {
     dummy,
     totalLikes,
-    favouriteBlog
+    favouriteBlog,
+    mostblog,
+    mostLikes
 }
 
 

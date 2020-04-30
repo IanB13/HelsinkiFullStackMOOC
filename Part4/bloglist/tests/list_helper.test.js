@@ -56,8 +56,29 @@ describe('total likes', () => {
 
   })
 
+describe("most blogs", ()=>{
+  test('when there are several blogs,',() =>{
+    const result = listHelper.mostblog(listWithSeveralBlogs)
+    expect(result).toEqual(
+      { author: 'Robert C. Martin', blogs: 3 }
+    )
+  })
+
+})
+
+describe("most Likes", ()=>{
+  test('when there are several blogs,',() =>{
+    const result = listHelper.mostLikes(listWithSeveralBlogs)
+    expect(result).toEqual(
+      { author: 'Edsger W. Dijkstra', likes: 17 }
+    )
+  })
+
+})
 
 
+
+// constants for testing below
 const listWithOneBlog = [
   {
     _id: '5a422aa71b54a676234d17f8',
