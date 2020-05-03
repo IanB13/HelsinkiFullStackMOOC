@@ -26,8 +26,19 @@ test('notes are returned as json', async () => {
 
 test('unique identifier is set to be id',async () => {
   const blog = await api.get('/api/blogs')
-  
   expect(blog.body[0].id).toBeDefined()
+})
+
+test('HTTP POST request to the /api/blogs url successfully creates a new blog post', async ()=>{
+  await api.post('/api/blogs')
+  .send(newBlog)
+  .expect(201)
+  .expect('Content-Type', /application\/json/)
+
+  const blogList = await api.get('/api/blogs')
+  expect(blogList.body[6].title).toBe("Whale Facts")
+  expect(blogList.body.length).toBe(7)
+
 })
 
 
@@ -86,3 +97,10 @@ const blogList =
     }
   ]
 
+const newBlog =     {
+  _id: "3a4c2bc61ba4a67b234d17fc",
+  title: "Whale Facts",
+  author: "Allex Rumbles",
+  url: "http://www.whalefacts.com",
+  likes: 20, __v: 0
+}
