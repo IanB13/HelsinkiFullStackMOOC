@@ -53,6 +53,23 @@ test('If title and author are undefined return 400 do not save',async ()=>{
   .expect(400)
 })
 
+test('Delete Blog' , async ()=>{
+  await api.delete('/api/blogs/5a422aa71b54a676234d17f8')
+  .expect(204)
+  const blog = await api.get('/api/blogs')
+  expect(blog.body.length).toBe(5)
+
+})
+
+
+test('update blog likes' , async ()=>{
+  await api.put('/api/blogs/5a422b3a1b54a676234d17f9')
+  .send(updateBlog)
+  .expect(200)
+
+  const blog = await api.get('/api/blogs')
+  expect(blog.body[2].likes).toBe(50)
+})
 
 afterAll(() => {
   mongoose.connection.close()
@@ -116,6 +133,17 @@ const newBlog =     {
   url: "http://www.whalefacts.com",
   likes: 20, __v: 0
 }
+
+const updateBlog=     {
+  _id: "5a422b3a1b54a676234d17f9",
+  title: "15 ways to reduce strings number 5 will suprise you!",
+  author: "Edsger W. Dijkstra",
+  url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+  likes: 50, __v: 0
+}
+
+
+
 
 const badBlog = {
   author: "Big Joe",
