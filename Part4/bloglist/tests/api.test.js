@@ -47,6 +47,12 @@ test('If likes are undefined in database a likes value of 0 is created',async ()
 
 })
 
+test('If title and author are undefined return 400 do not save',async ()=>{
+  await api.post('/api/blogs')
+  .send(badBlog)
+  .expect(400)
+})
+
 
 afterAll(() => {
   mongoose.connection.close()
@@ -111,7 +117,7 @@ const newBlog =     {
   likes: 20, __v: 0
 }
 
-const badBlog1 = {
-
-
+const badBlog = {
+  author: "Big Joe",
+  likes: 10, __v: 0
 }

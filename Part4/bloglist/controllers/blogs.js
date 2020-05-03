@@ -13,11 +13,17 @@ blogRouter.get('/', async (request, response) => {
 
 blogRouter.post('/', async (request, response) => {
     const blog =  new Blog(request.body)
-  
+    if( !(request.body.title || request.body.url)){
+      response.status(400).json({ 
+        error: 'content missing'
+      })
+      logger.info('bad request')
+    }
+    else{
     const blogSave = await blog.save()
     response.status(201).json(blogSave)
     logger.info(`${blogSave}`)
-
+    }
   })
   
 module.exports = blogRouter
