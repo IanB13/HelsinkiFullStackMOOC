@@ -41,6 +41,12 @@ test('HTTP POST request to the /api/blogs url successfully creates a new blog po
 
 })
 
+test('If likes are undefined in database a likes value of 0 is created',async ()=>{
+  const blog = await api.get('/api/blogs')
+  expect(blog.body[1].likes).toBe(0)
+
+})
+
 
 afterAll(() => {
   mongoose.connection.close()
@@ -65,7 +71,7 @@ const blogList =
       title: "Go To Statement Considered Harmful",
       author: "Edsger W. Dijkstra",
       url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
-      likes: 5, __v: 0
+       __v: 0
     },
     {
       _id: "5a422b3a1b54a676234d17f9",
@@ -103,4 +109,9 @@ const newBlog =     {
   author: "Allex Rumbles",
   url: "http://www.whalefacts.com",
   likes: 20, __v: 0
+}
+
+const badBlog1 = {
+
+
 }
