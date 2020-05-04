@@ -4,7 +4,7 @@ const app = require('../index')
 const Blog = require('../models/Blog')
 const api = supertest(app)
 
-describe("API Integration tests",  () =>{
+describe('Blog',  () =>{
 beforeEach(async () =>{
   await Blog.deleteMany({})
 

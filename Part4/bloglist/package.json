@@ -7,7 +7,8 @@
     "start": "cross-env NODE_ENV=production node index.js",
     "watch": "cross-env NODE_ENV=development nodemon index.js",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "test api": "cross-env NODE_ENV=test jest --verbose --runInBand '-t' 'API Integration tests' "
+    "test-blog": "cross-env NODE_ENV=test jest --verbose --runInBand '-t' 'Blog'",
+    "test-user": "cross-env NODE_ENV=test jest --verbose --runInBand '-t' 'User'"
   },
   "author": "IB",
   "license": "ISC",
