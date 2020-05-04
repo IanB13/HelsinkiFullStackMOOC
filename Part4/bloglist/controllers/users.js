@@ -20,4 +20,11 @@ userRouter.post('/', async (request, response) => {
     response.json(savedUser)
   })
 
+userRouter.get('/', async (request, response) => {
+  const user = await  User.find({})
+  response.json(user)
+  logger.info(`/api/user sent`)
+})
+
+
 module.exports = userRouter
