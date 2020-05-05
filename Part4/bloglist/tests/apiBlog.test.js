@@ -4,7 +4,7 @@ const app = require('../index')
 const Blog = require('../models/Blog')
 const api = supertest(app)
 
-describe('Blog',  () =>{
+describe('Blog dnwuie7',  () =>{
 beforeEach(async () =>{
   await Blog.deleteMany({})
 
@@ -75,8 +75,6 @@ afterAll(() => {
   mongoose.connection.close()
 })
 
-}
-)
 
 
 ///blog constant, used to initalize database before each test
@@ -90,7 +88,7 @@ const blogList =
       likes: 7, __v: 0
     },
     {
-      _id: "5a422aa71b54a676234d17f8",
+      _id: "5a422aa71b54a666234d17f8",
       title: "Go To Statement Considered Harmful",
       author: "Edsger W. Dijkstra",
       url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
@@ -104,7 +102,7 @@ const blogList =
       likes: 12, __v: 0
     },
     {
-      _id: "5a422b891b54a676234d17fa",
+      _id: "5a422aa71b54a676234d17f8",
       title: "First class tests",
       author: "Robert C. Martin",
       url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
@@ -118,7 +116,7 @@ const blogList =
       likes: 0, __v: 0
     },
     {
-      _id: "5a422bc61b54a676234d17fc",
+      _id: "5a422bc66b54a676234d17fc",
       title: "Type wars",
       author: "Robert C. Martin",
       url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
@@ -127,7 +125,7 @@ const blogList =
   ]
 
 const newBlog =     {
-  _id: "3a4c2bc61ba4a67b234d17fc",
+  _id: "3a4c2bc61bd4a67b234d17fc",
   title: "Whale Facts",
   author: "Allex Rumbles",
   url: "http://www.whalefacts.com",
@@ -135,7 +133,7 @@ const newBlog =     {
 }
 
 const updateBlog=     {
-  _id: "5a422b3a1b54a676234d17f9",
+  _id: "5c422b3a1b54a676234d17f9",
   title: "15 ways to reduce strings number 5 will suprise you!",
   author: "Edsger W. Dijkstra",
   url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
@@ -149,3 +147,6 @@ const badBlog = {
   author: "Big Joe",
   likes: 10, __v: 0
 }
+
+}
+)

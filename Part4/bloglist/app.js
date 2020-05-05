@@ -17,7 +17,7 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true,useUnifiedTopology:
   logger.error(err)
 })
 
-//app.use(middleware.requestLogger)
+app.use(middleware.requestLogger)
 
 app.use(cors())
 app.use(bodyParser.json())
