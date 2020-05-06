@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     minlength: 3,
     required: true
   },
-  notes: [
+  blogs: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Blog'

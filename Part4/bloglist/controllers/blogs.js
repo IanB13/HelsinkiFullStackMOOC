@@ -1,5 +1,6 @@
 const blogRouter = require('express').Router()
 const Blog = require(`../models/Blog`) //gets moongoose model
+const User = require('../models/User')
 const logger = require('../utils/logger')
 
 blogRouter.get('/', async (request, response) => {
@@ -9,18 +10,31 @@ blogRouter.get('/', async (request, response) => {
     
   })
 
-
-
 blogRouter.post('/', async (request, response) => {
-    const blog =  new Blog(request.body)
-    if( !(request.body.title || request.body.url)){
+    const body = request.body
+    if( !(body.title || body.url)){
       response.status(400).json({ 
         error: 'content missing'
       })
       logger.info('bad request')
     }
     else{
+    const userData = await User.findById(body.userId)
+    const user = {
+      username:userData.username,
+      name: userData.name,
+      id: userData._id
+    }
+    const blog =  new Blog({
+      title: body.title,
+      author: body.author,
+      url: body.url,
+      likes: body.likes,
+      user: user
+    })
     const blogSave = await blog.save()
+    userData.blogs = userData.blogs.concat(blogSave._id)
+    await userData.save()
     response.status(201).json(blogSave)
     logger.info(`${blogSave}`)
     }
