@@ -4,13 +4,6 @@ const User = require('../models/User')
 const logger = require('../utils/logger')
 const jwt = require('jsonwebtoken')
 
-const getTokenFrom = (request) => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
-  }
-  return null
-}
 
 blogRouter.get('/', async (request, response) => {
     const blogs = await  Blog.find({})
@@ -50,7 +43,9 @@ blogRouter.post('/', async (request, response) => {
       user: user
     })
     const blogSave = await blog.save()
+
     userData.blogs = userData.blogs.concat(blogSave._id)
+    console.log( userData.blogs)
     await userData.save()
     response.status(201).json(blogSave)
     logger.info(`${blogSave}`)
