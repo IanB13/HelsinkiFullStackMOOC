@@ -14,10 +14,26 @@ const App = () => {
       setBlogs( blogs )
     )  
   }, [])  
+ //checks for logged in user
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedinBlogUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, []) 
+
+  const logout = () =>{
+    window.localStorage.removeItem('loggedinBlogUser')
+    setUser(null)
+  }
+
   if(user){
   return (
     <div>
       <h2>blogs</h2>
+      <p>{user.name} is logged in <button onClick ={logout}> logout </button></p>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
@@ -27,10 +43,9 @@ const App = () => {
   else{
     return(
       <LoginForm 
-      username = {username} 
-      setUsername ={setUsername}
-      password ={password} 
-      setPassword ={setPassword}
+      username = {username} setUsername = {setUsername}
+      password = {password} setPassword = {setPassword}
+      user ={user} setUser = {setUser}
       />
     )
 

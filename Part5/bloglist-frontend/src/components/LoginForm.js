@@ -1,8 +1,29 @@
 import React from 'react'
-import handleLogin from "../services/handleLogin"
+import loginService from '../services/login'
 
-const LoginForm =({username,setUsername,password,setPassword}) =>{
-
+const LoginForm =({username,setUsername,password,setPassword,user,setUser}) =>{
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    console.log('logging in',username,password)
+    try {
+      const user = await loginService.login({
+        username, password,
+      })
+      setUser(user)
+      setUsername('')
+      setPassword('')
+      window.localStorage.setItem(
+        'loggedinBlogUser', JSON.stringify(user)
+      ) 
+    } catch (exception) {
+      //setErrorMessage('Wrong credentials')
+      console.log('Wrong credentials')
+      setTimeout(() => {
+        //setErrorMessage(null)
+      }, 5000)
+    }
+  }
+  
 return(
     <form onSubmit={handleLogin}>
     <div>
