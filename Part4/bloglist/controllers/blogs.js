@@ -44,7 +44,13 @@ blogRouter.post('/', async (request, response) => {
     })
     const blogSave = await blog.save()
 
-    userData.blogs = userData.blogs.concat(blogSave._id)
+    const saveBlogtoUser = {
+      title: body.title,
+      author: body.author,
+      url: body.url,
+      id:blogSave._id
+    }
+    userData.blogs = userData.blogs.concat(saveBlogtoUser)
     console.log( userData.blogs)
     await userData.save()
     response.status(201).json(blogSave)
@@ -74,3 +80,9 @@ const updatedBlog =  await Blog.findByIdAndUpdate(request.params.id, blog, { new
 })
 
 module.exports = blogRouter
+
+/* {"id":blogSave._id,
+url: body.url,
+title: body.title,
+author: body.author
+} */
