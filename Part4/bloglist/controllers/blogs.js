@@ -17,9 +17,7 @@ blogRouter.post('/', async (request, response) => {
     const body = request.body
     const token = request.token
     const decodedToken = jwt.verify(token, process.env.SECRET)
-   
     if (!token || !decodedToken.id) {
-      console.log("here")
       return response.status(401).json({ error: 'token missing or invalid' })
     }
     if( !(body.title || body.url)){
@@ -30,6 +28,8 @@ blogRouter.post('/', async (request, response) => {
     }
     else{
     const userData = await User.findById(decodedToken.id)
+    console.log("user data is")
+    console.log(userData)
     const user = {
       username:userData.username,
       name: userData.name,
@@ -59,8 +59,26 @@ blogRouter.post('/', async (request, response) => {
   })
 
 blogRouter.delete('/:id', async (request, response) => {
-  await Blog.findByIdAndRemove(request.params.id)
-  response.status(204).json({"delete":"delete"})
+  console.log("delete request")
+  const token = request.token
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  console.log("user attempting to delete token:")
+  console.log(decodedToken)
+  if (!token || !decodedToken.id) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
+  const blogToDelete =  await Blog.findById(request.params.id)
+  console.log("blog to be deleted")
+  console.log(blogToDelete)
+  if(blogToDelete.user.id.toString() === decodedToken.id.toString()){
+    console.log("delete allowed")
+    await Blog.findByIdAndDelete(request.params.id)
+    response.status(204).json({"delete":"delete"})
+  }
+  else{
+    return response.status(400).json({ error: 'blog created by other user' })
+  }
+  
 }) 
 
 
@@ -80,9 +98,3 @@ const updatedBlog =  await Blog.findByIdAndUpdate(request.params.id, blog, { new
 })
 
 module.exports = blogRouter
-
-/* {"id":blogSave._id,
-url: body.url,
-title: body.title,
-author: body.author
-} */
