@@ -2,11 +2,27 @@ const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../index')
 const Blog = require('../models/Blog')
+const User = require('../models/User')
 const api = supertest(app)
 
+let outsidetoken = null
+
 describe('Blog dnwuie7',  () =>{
+beforeAll(async() =>{
+  const user = await api.post('/api/login')
+  .send({
+    "username":"coolBoi",
+    "password":"hunter2"
+    }) 
+  expect(user.body.token).toBeDefined()
+  const Auth = `bearer ${user.body.token}`  
+  outsidetoken = Auth
+  }
+)
+
 beforeEach(async () =>{
   await Blog.deleteMany({})
+  .set("Authorization",outsidetoken)
 
   let blogObject = new Blog()
   for(blog of blogList){
@@ -16,26 +32,39 @@ beforeEach(async () =>{
   }
 })
 
-test('notes are returned as json', async () => {
+test('notes123 are returned as json', async () => {
+
   const blog = await api.get('/api/blogs')
+    .set("Authorization",outsidetoken)
     .expect(200)
     .expect('Content-Type', /application\/json/)
 
-    expect(blog.body.length).toBe(6)
+    expect(blog.body.length).toBe(6) 
 })
 
 test('unique identifier is set to be id',async () => {
+  const user = await api.post('/api/login')
+  .send({
+    "username":"coolBoi",
+    "password":"hunter2"
+    }) 
+  expect(user.body.token).toBeDefined()
+  const Auth = `bearer ${user.body.token}` 
+
   const blog = await api.get('/api/blogs')
+  .set("Authorization",Auth)
   expect(blog.body[0].id).toBeDefined()
 })
 
 test('HTTP POST request to the /api/blogs url successfully creates a new blog post', async ()=>{
   await api.post('/api/blogs')
+  .set("Authorization",outsidetoken)
   .send(newBlog)
   .expect(201)
   .expect('Content-Type', /application\/json/)
 
   const blogList = await api.get('/api/blogs')
+  .set("Authorization",outsidetoken)
   expect(blogList.body[6].title).toBe("Whale Facts")
   expect(blogList.body.length).toBe(7)
 
@@ -43,20 +72,25 @@ test('HTTP POST request to the /api/blogs url successfully creates a new blog po
 
 test('If likes are undefined in database a likes value of 0 is created',async ()=>{
   const blog = await api.get('/api/blogs')
+  .set("Authorization",outsidetoken)
   expect(blog.body[1].likes).toBe(0)
 
 })
 
 test('If title and author are undefined return 400 do not save',async ()=>{
   await api.post('/api/blogs')
+  .set("Authorization",outsidetoken)
   .send(badBlog)
   .expect(400)
 })
 
-test('Delete Blog' , async ()=>{
-  await api.delete('/api/blogs/5a422aa71b54a676234d17f8')
+test('Delete123 Blog' , async ()=>{
+  await api.delete('/api/blogs/5a422aa71b54a666234d17f8')
+  .set("Authorization",outsidetoken)
   .expect(204)
+
   const blog = await api.get('/api/blogs')
+  .set("Authorization",outsidetoken)
   expect(blog.body.length).toBe(5)
 
 })
@@ -64,6 +98,7 @@ test('Delete Blog' , async ()=>{
 
 test('update blog likes' , async ()=>{
   await api.put('/api/blogs/5a422b3a1b54a676234d17f9')
+  .set("Authorization",outsidetoken)
   .send(updateBlog)
   .expect(200)
 
@@ -72,7 +107,7 @@ test('update blog likes' , async ()=>{
 })
 
 afterAll(() => {
-  mongoose.connection.close()
+  //mongoose.connection.close()
 })
 
 
