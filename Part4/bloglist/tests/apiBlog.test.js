@@ -106,8 +106,16 @@ test('update blog likes' , async ()=>{
   expect(blog.body[2].likes).toBe(50)
 })
 
+test('bad token returns 401', async ()=>{
+  await api.post('/api/blogs')
+  .set("Authorization","bearer abchbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IklhbiIsImlkIjoiNWViNDQ3OWY2NDc4ZDYzN2QwZTk1MmVlIiwiaWF0IjoxNTg4ODczNjIzfQ.fydQ-mMW1stLnTHpXgGZGyIAQDGM72lyPXOHBEr663c")
+  .send(newBlog)
+  .expect(401)
+})
+
+
 afterAll(() => {
-  //mongoose.connection.close()
+  mongoose.connection.close()
 })
 
 
@@ -126,6 +134,8 @@ const blogList =
       _id: "5a422aa71b54a666234d17f8",
       title: "Go To Statement Considered Harmful",
       author: "Edsger W. Dijkstra",
+      user: { username: 'coolBoi',
+      id: '5eb7330281709a26c0c59f68'},
       url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
        __v: 0
     },
@@ -141,6 +151,8 @@ const blogList =
       title: "First class tests",
       author: "Robert C. Martin",
       url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
+       user: { username: 'coolBoi',
+              id: '5eb7330281709a26c0c59f68'},
       likes: 10, __v: 0
     },
     {
