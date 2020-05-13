@@ -6,8 +6,6 @@ import NewBlogForm from './components/NewBlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [reloadBlogs,triggerBlogReload] =useState(0)
   const [message, setMessage] = useState(null)
@@ -63,8 +61,6 @@ const App = () => {
       <>
       {message}
       <LoginForm 
-      username = {username} setUsername = {setUsername}
-      password = {password} setPassword = {setPassword}
       user ={user} setUser = {setUser}
       setMessage ={setMessage}
       />

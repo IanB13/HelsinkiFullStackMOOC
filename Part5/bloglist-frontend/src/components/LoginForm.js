@@ -1,7 +1,10 @@
-import React from 'react'
+import React,{useState} from 'react'
 import loginService from '../services/login'
 
-const LoginForm =({username,setUsername,password,setPassword,user,setUser,setMessage}) =>{
+const LoginForm =({setUser,setMessage}) =>{
+  const [username, setUsername] = useState('') 
+  const [password, setPassword] = useState('')
+
   const handleLogin = async (event) => {
     event.preventDefault()
     console.log('logging in',username,password)
