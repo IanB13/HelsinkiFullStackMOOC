@@ -10,12 +10,21 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [reloadBlogs,triggerBlogReload] =useState(0)
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
     )  
   }, [reloadBlogs])  
+
+  useEffect(()=>{
+    setMessage(message)
+    console.log(`message set to ${message}`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000)
+  },[message])
 
  //checks for logged in user
   useEffect(() => {
@@ -35,10 +44,12 @@ const App = () => {
   if(user){
   return (
     <div>
+      {message}
       <div>
       <h2>blogs</h2>
       <p>{user.name} is logged in <button onClick ={logout}> logout </button></p>
-      <NewBlogForm user={user} triggerBlogReload={triggerBlogReload}/>
+      <NewBlogForm user={user} triggerBlogReload={triggerBlogReload}
+       setMessage ={setMessage}/>
       </div>
 
       {blogs.map(blog =>
@@ -49,11 +60,15 @@ const App = () => {
   }
   else{
     return(
+      <>
+      {message}
       <LoginForm 
       username = {username} setUsername = {setUsername}
       password = {password} setPassword = {setPassword}
       user ={user} setUser = {setUser}
+      setMessage ={setMessage}
       />
+      </>
     )
 
   }

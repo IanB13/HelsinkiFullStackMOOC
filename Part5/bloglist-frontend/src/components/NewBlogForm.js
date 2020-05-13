@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import blogService from '../services/blogs'
 
-const NewBlogForm = ({user,triggerBlogReload}) =>{
+const NewBlogForm = ({user,triggerBlogReload,setMessage}) =>{
     const [title,setTitle ] = useState("")
     const [author,setAuthor ] = useState("")
     const [URL,setURL ] = useState("")
@@ -9,12 +9,22 @@ const NewBlogForm = ({user,triggerBlogReload}) =>{
     const handleFormSubmission = async (event)=>{
         event.preventDefault()
         const blog = { title,author,URL,user}
-        const response = await blogService.create(blog)
+        let response = null;
+        try{ response = await blogService.create(blog)}
+        catch(e){setMessage("bad request") 
         console.log(response)
-        setTitle("")
-        setAuthor("")
-        setURL("")
-        triggerBlogReload(blog)
+        response = null
+      } 
+        
+      console.log(response)
+      if(response){
+      setMessage(`a new blog created`)
+      setTitle("")
+      setAuthor("")
+      setURL("")
+      triggerBlogReload(blog)
+      
+      }
     }
     
 return(

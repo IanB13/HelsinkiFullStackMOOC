@@ -1,7 +1,7 @@
 import React from 'react'
 import loginService from '../services/login'
 
-const LoginForm =({username,setUsername,password,setPassword,user,setUser}) =>{
+const LoginForm =({username,setUsername,password,setPassword,user,setUser,setMessage}) =>{
   const handleLogin = async (event) => {
     event.preventDefault()
     console.log('logging in',username,password)
@@ -16,11 +16,8 @@ const LoginForm =({username,setUsername,password,setPassword,user,setUser}) =>{
         'loggedinBlogUser', JSON.stringify(user)
       ) 
     } catch (exception) {
-      //setErrorMessage('Wrong credentials')
+      setMessage('Wrong credentials')
       console.log('Wrong credentials')
-      setTimeout(() => {
-        //setErrorMessage(null)
-      }, 5000)
     }
   }
   
