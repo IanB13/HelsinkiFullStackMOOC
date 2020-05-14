@@ -9,7 +9,7 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [reloadBlogs,triggerBlogReload] =useState(null)
   const [message, setMessage] = useState(null)
-
+  blogs.sort( (firstblog,secondblog) =>  secondblog.likes- firstblog.likes)
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
