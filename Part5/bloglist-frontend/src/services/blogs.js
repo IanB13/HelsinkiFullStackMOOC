@@ -21,4 +21,13 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-export default { getAll, setToken ,create}
+const addlike = async (object) =>{
+  console.log(`like for ${object.id} has been pressed`)
+  console.log(object)
+  object.likes++
+ const response  =await axios.put(`${baseUrl}/${object.id}`,object)
+ return response
+}
+
+
+export default { getAll, setToken, create, addlike}

@@ -7,7 +7,7 @@ import NewBlogForm from './components/NewBlogForm'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
-  const [reloadBlogs,triggerBlogReload] =useState(0)
+  const [reloadBlogs,triggerBlogReload] =useState(null)
   const [message, setMessage] = useState(null)
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const App = () => {
       </div>
 
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} triggerBlogReload={triggerBlogReload} />
       )}
     </div>
   )
