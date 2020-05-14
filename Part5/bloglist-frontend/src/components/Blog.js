@@ -12,6 +12,11 @@ const like = async ()=>{
   triggerBlogReload(blog)
 }
 
+const deleteBlog = async ()=>{
+  await blogServices.deleteBlog(blog)
+  triggerBlogReload(blog.id)
+}
+
 const blogStyle = {
   paddingTop: 10,
   paddingLeft: 2,
@@ -31,6 +36,7 @@ return(
     {blog.url}<br></br>
     {blog.likes} <button onClick = {like}>like</button><br></br>
     {blog.user.name}<br></br>
+    <button onClick = {deleteBlog}> Remove </button>
     <button onClick ={toggleVisability}>hide</button>
     </div>
 

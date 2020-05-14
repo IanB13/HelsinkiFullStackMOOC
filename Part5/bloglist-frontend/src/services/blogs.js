@@ -22,12 +22,18 @@ const getAll = () => {
 }
 
 const addlike = async (object) =>{
-  console.log(`like for ${object.id} has been pressed`)
-  console.log(object)
-  object.likes++
+object.likes++
  const response  =await axios.put(`${baseUrl}/${object.id}`,object)
  return response
 }
 
+const deleteBlog = async (object) =>{
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response  =await axios.delete(`${baseUrl}/${object.id}`,config)
+  return response
+}
 
-export default { getAll, setToken, create, addlike}
+
+export default { getAll, setToken, create, addlike,deleteBlog}
