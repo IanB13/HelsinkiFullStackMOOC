@@ -1,12 +1,19 @@
 import React,{useState} from 'react'
 import blogServices from '../services/blogs'
-const Blog = ({ blog , triggerBlogReload }) => {
+const Blog = ({ blog , triggerBlogReload, user}) => {
  const [blogVisible, setBlogVisible] = useState(false)
  const hideWhenVisible = { display: blogVisible ? 'none' : '' }
  const showWhenVisible = { display: blogVisible ? '' : 'none' }
  const toggleVisability =()=>{
   setBlogVisible(!blogVisible)
 }
+const deleteVisable = { display: (blog.user.username === user.username) ?'' : 'none'}
+
+
+console.log(blog.user.username)
+console.log(user.username)
+console.log(deleteVisable)
+
 const like = async ()=>{
   await blogServices.addlike(blog)
   triggerBlogReload(blog)
@@ -36,7 +43,7 @@ return(
     {blog.url}<br></br>
     {blog.likes} <button onClick = {like}>like</button><br></br>
     {blog.user.name}<br></br>
-    <button onClick = {deleteBlog}> Remove </button>
+    <button onClick = {deleteBlog} style = {deleteVisable}> Remove </button>
     <button onClick ={toggleVisability}>hide</button>
     </div>
 

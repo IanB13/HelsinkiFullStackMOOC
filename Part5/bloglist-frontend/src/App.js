@@ -51,7 +51,7 @@ const App = () => {
       </div>
 
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} triggerBlogReload={triggerBlogReload} />
+        <Blog key={blog.id} blog={blog} user={user} triggerBlogReload={triggerBlogReload} />
       )}
     </div>
   )
