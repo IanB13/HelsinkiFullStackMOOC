@@ -21,13 +21,13 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-const addlike = async (object) =>{
-object.likes++
- const response  =await axios.put(`${baseUrl}/${object.id}`,object)
- return response
+const addlike = async (object) => {
+  object.likes++
+  const response  =await axios.put(`${baseUrl}/${object.id}`,object)
+  return response
 }
 
-const deleteBlog = async (object) =>{
+const deleteBlog = async (object) => {
   const config = {
     headers: { Authorization: token },
   }
@@ -36,4 +36,4 @@ const deleteBlog = async (object) =>{
 }
 
 
-export default { getAll, setToken, create, addlike,deleteBlog}
+export default { getAll, setToken, create, addlike,deleteBlog }

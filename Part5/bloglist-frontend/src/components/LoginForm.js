@@ -1,9 +1,9 @@
-import React,{useState} from 'react'
+import React,{ useState } from 'react'
 import loginService from '../services/login'
 import blogService from '../services/blogs'
 
-const LoginForm =({setUser,setMessage}) =>{
-  const [username, setUsername] = useState('') 
+const LoginForm =({ setUser,setMessage }) => {
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const handleLogin = async (event) => {
@@ -18,37 +18,35 @@ const LoginForm =({setUser,setMessage}) =>{
       blogService.setToken(user.token)
       window.localStorage.setItem(
         'loggedinBlogUser', JSON.stringify(user)
-      ) 
+      )
     } catch (exception) {
       setMessage('Wrong credentials')
     }
   }
-  
-return(
+
+  return (
     <form onSubmit={handleLogin}>
-    <div>
-      username
+      <div>
+        username
         <input
-        type="text"
-        value={username}
-        name="Username"
-        onChange={({ target }) => setUsername(target.value)}
-      />
-    </div>
-    <div>
-      password
+          type="text"
+          value={username}
+          name="Username"
+          onChange={({ target }) => setUsername(target.value)}
+        />
+      </div>
+      <div>
+        password
         <input
-        type="password"
-        value={password}
-        name="Password"
-        onChange={({ target }) => setPassword(target.value)}
-      />
-    </div>
-    <button type="submit">login</button>
-  </form>
-
-
-)
+          type="password"
+          value={password}
+          name="Password"
+          onChange={({ target }) => setPassword(target.value)}
+        />
+      </div>
+      <button type="submit">login</button>
+    </form>
+  )
 }
 
 export default LoginForm
