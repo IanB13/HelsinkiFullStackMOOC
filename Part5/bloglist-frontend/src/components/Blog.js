@@ -30,15 +30,15 @@ const Blog = ({ blog, triggerBlogReload, user }) => {
   }
   return (
 
-    <div style={blogStyle}>
+    <div style={blogStyle} className = "blog">
       {blog.title} {blog.author}
 
       <button style={hideWhenVisible} onClick={toggleVisability}>
         view
       </button>
-      <div style={showWhenVisible}>
+      <div style={showWhenVisible} className ="blogInfo">
         {blog.url}<br></br>
-        {blog.likes} <button onClick={like}>like</button><br></br>
+        {blog.likes} <button onClick={like} className ="likeButton">like</button><br></br>
         {blog.user.name}<br></br>
         <button onClick={deleteBlog} style={deleteVisable}> Remove </button>
         <button onClick={toggleVisability}>hide</button>

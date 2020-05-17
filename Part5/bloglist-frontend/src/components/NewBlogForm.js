@@ -27,7 +27,7 @@ const NewBlogForm = ({ user,triggerBlogReload,setMessage }) => {
       setAuthor('')
       setURL('')
       triggerBlogReload(blog)
-
+      setBlogVisible(false)
     }
   }
   const toggleVisability =() => {
