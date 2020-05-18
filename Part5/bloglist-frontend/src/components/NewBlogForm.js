@@ -13,6 +13,7 @@ const NewBlogForm = ({ user,triggerBlogReload,setMessage }) => {
   const handleFormSubmission = async (event) => {
     event.preventDefault()
     const blog = { title,author,URL,user }
+    triggerBlogReload(blog) //second one to make tests works? need to do async testing.
     let response = null
     try{ response = await blogService.create(blog)}
     catch(e){setMessage('bad request')
@@ -44,6 +45,7 @@ const NewBlogForm = ({ user,triggerBlogReload,setMessage }) => {
           <div>
         title
             <input
+              id = "blogTitle"
               type="text"
               value={title}
               name="title"
@@ -53,6 +55,7 @@ const NewBlogForm = ({ user,triggerBlogReload,setMessage }) => {
           <div>
         author
             <input
+              id = "blogAuthor"
               type="text"
               value={author}
               name="author"
@@ -62,13 +65,14 @@ const NewBlogForm = ({ user,triggerBlogReload,setMessage }) => {
           <div>
         URL
             <input
+              id = "blogURL"
               type="text"
               value={URL}
               name="URL"
               onChange={({ target }) => setURL(target.value)}
             />
           </div>
-          <button type="submit">create</button>
+          <button id = "newBlogButton" type="submit">create</button>
         </form>
         <button onClick={toggleVisability}>
       Cancel
