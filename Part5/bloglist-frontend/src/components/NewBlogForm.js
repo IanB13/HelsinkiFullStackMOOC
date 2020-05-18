@@ -38,7 +38,7 @@ const NewBlogForm = ({ user,triggerBlogReload,setMessage }) => {
   return(
     <>
       <div style={hideWhenVisible}>
-        <button onClick ={toggleVisability}>new blog</button>
+        <button id = "newBlogButton" onClick ={toggleVisability}>new blog</button>
       </div>
       <div style={showWhenVisible} >
         <form onSubmit={handleFormSubmission}>
@@ -72,10 +72,10 @@ const NewBlogForm = ({ user,triggerBlogReload,setMessage }) => {
               onChange={({ target }) => setURL(target.value)}
             />
           </div>
-          <button id = "newBlogButton" type="submit">create</button>
+          <button id = "submitBlog" type="submit">create</button>
         </form>
         <button onClick={toggleVisability}>
-      Cancel
+          Cancel
         </button>
       </div>
     </>
