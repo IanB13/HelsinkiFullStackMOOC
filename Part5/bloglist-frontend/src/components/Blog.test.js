@@ -34,28 +34,21 @@ test('when "View" is clicked Blog URL and number of likes are shown', () => {
 })
 
 
-test('when ""like" is clicked twice likes are called twice', () => {
-  const mockboi = jest.fn()
+test('when ""like" is clicked twice likes are called twice', async () => {
+  //mock function not being called
 
+  const mockTrigger = jest.fn()
   const component = render(
-    <Blog blog ={blogInput.blog} user ={blogInput.user} triggerBlogReload = {mockboi}/>
+    <Blog blog ={blogInput.blog} user ={blogInput.user} triggerBlogReload = {mockTrigger}/>
   )
 
   const viewButton = component.getByText('view')
   fireEvent.click(viewButton)
-
   screen.debug(component.container.querySelector('.likeButton'))
   const likeButton = component.container.querySelector('.likeButton')
-  screen.debug(likeButton)
   fireEvent.click(likeButton)
   fireEvent.click(likeButton)
-  fireEvent.click(likeButton)
-  fireEvent.click(likeButton)
-  fireEvent.click(likeButton)
-  fireEvent.click(likeButton)
-  screen.debug(component.container)
-  console.log(mockboi.mock.calls)
-  expect(mockboi.mock).toHaveLength(1)
+  expect(mockTrigger.mock.calls).toHaveLength(2)
 
 })
 

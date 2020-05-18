@@ -12,13 +12,13 @@ const Blog = ({ blog, triggerBlogReload, user }) => {
   const deleteVisable = { display: (blog.user.username === user.username) ? '' : 'none' }
 
   const like = async () => {
-    await blogServices.addlike(blog)
     triggerBlogReload(blog)
+    await blogServices.addlike(blog)
   }
 
   const deleteBlog = async () => {
-    await blogServices.deleteBlog(blog)
     triggerBlogReload(blog.id)
+    await blogServices.deleteBlog(blog)
   }
 
   const blogStyle = {
