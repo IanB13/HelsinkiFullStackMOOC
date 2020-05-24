@@ -12,13 +12,13 @@ const Blog = ({ blog, triggerBlogReload, user }) => {
   const deleteVisable = { display: (blog.user.username === user.username) ? '' : 'none' }
 
   const like = async () => {
-    triggerBlogReload(blog)
     await blogServices.addlike(blog)
+    triggerBlogReload(blog)
   }
 
   const deleteBlog = async () => {
-    triggerBlogReload(blog.id)
     await blogServices.deleteBlog(blog)
+    triggerBlogReload(blog.id)
   }
 
   const blogStyle = {
@@ -40,8 +40,8 @@ const Blog = ({ blog, triggerBlogReload, user }) => {
         {blog.url}<br></br>
         {blog.likes} <button onClick={like} className ="like">like</button><br></br>
         {blog.user.name}<br></br>
-        <button onClick={deleteBlog} style={deleteVisable}> Remove </button>
-        <button onClick={toggleVisability}>hide</button>
+        <button className = "remove" onClick={deleteBlog} style={deleteVisable}> Remove </button>
+        <button className = "hide"  onClick={toggleVisability}>hide</button>
       </div>
 
     </div>

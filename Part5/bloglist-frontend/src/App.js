@@ -45,7 +45,7 @@ const App = () => {
         {message}
         <div>
           <h2>blogs</h2>
-          <p>{user.name} is logged in <button onClick={logout}> logout </button></p>
+          <p>{user.name} is logged in <button id = 'logout' onClick={logout}> logout </button></p>
           <NewBlogForm user={user} triggerBlogReload={triggerBlogReload}
             setMessage={setMessage} />
         </div>

@@ -12,8 +12,8 @@ const NewBlogForm = ({ user,triggerBlogReload,setMessage }) => {
 
   const handleFormSubmission = async (event) => {
     event.preventDefault()
-    const blog = { title,author,URL,user }
-    triggerBlogReload(blog) //second one to make tests works? need to do async testing.
+    const blog = { title,author,url:URL,user }
+    triggerBlogReload() //second one to make tests works? need to do async testing.
     let response = null
     try{ response = await blogService.create(blog)}
     catch(e){setMessage('bad request')
