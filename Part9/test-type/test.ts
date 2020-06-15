@@ -10,6 +10,7 @@ const calculator = (a: number, b: number, op : Operation) => {
     if (b === 0) return 'can\'t divide by 0!';
     return a / b;
   }
+  return null
 }
 
 console.error(calculator(7,7,'add'));
