@@ -8,35 +8,34 @@ interface exerciseInterface {
     average: number;
 }
 
-const exerciseCalc = (dailyHours:number[]):exerciseInterface =>{
-    const periodLength = dailyHours.length
+const exerciseCalc = (dailyHours:number[],target:number):exerciseInterface =>{
+    const periodLength = dailyHours.length;
     
     const  trainingDays = dailyHours.reduce( (acc,cur) =>{
         if(cur){
-            return ++acc
+            return ++acc;
         }
-        return acc
-    },0)
+        return acc;
+    },0);
 
     const totalHours = dailyHours.reduce( (acc,cur) =>{
         if(cur){
-            return acc+cur
+            return acc+cur;
         }
-        return acc
-    },0)
+        return acc;
+    },0);
 
-    const target = 2
-    const average = totalHours/periodLength
+    const average = totalHours/periodLength;
 
-    const success = (average >= target) ? true :false
-    const rating = Math.floor(Math.random()*5)
-    const ratingDescription = 'not too bad but could be better'
+    const success = (average >= target) ? true :false;
+    const rating = Math.floor(Math.random()*5);
+    const ratingDescription = success? "good work!": "fAiLuRe";
 
     return(
         {periodLength,trainingDays,success,rating,
         ratingDescription,target,average
         }
-    )
-}
+    );
+};
 
-console.log(exerciseCalc([1,2,3,4,0,0,8,3,42,3]))
+export default exerciseCalc;
