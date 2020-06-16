@@ -1,7 +1,7 @@
 {
-  "name": "flight-diaries",
+  "name": "patienator-backend",
   "version": "0.0.1",
-  "description": "Ilari's flight diaries, a typescript node.js backend",
+  "description": "Backend for patienator",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
