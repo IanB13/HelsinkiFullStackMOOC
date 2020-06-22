@@ -1,12 +1,24 @@
-import patientData from '../data/patients.json';
-console.log(patientData);
-import { Patient } from '../types';
+import patientData from '../data/patients';
+import { Patient , safePatient} from '../types';
 
-const patients: Array<Patient> = patientData;
+const patients:Array<Patient> = patientData;
 
 const getEntries = ():Array<Patient> => {
     return patients;
   };
+
+const getSafeEntries = ():safePatient[]=>{
+  const noSSN = patients.map(({id ,name ,dateOfBirth ,gender ,occupation})=>{ return(
+    {id,
+    name,
+    dateOfBirth,
+    gender,
+    occupation
+    }
+  );
+});
+  return noSSN;
+};
 
   //this currently does nothin
   const addEntry = ():null => {
@@ -15,5 +27,6 @@ const getEntries = ():Array<Patient> => {
   
   export default {
     getEntries,
-    addEntry
+    addEntry,
+    getSafeEntries
   };
