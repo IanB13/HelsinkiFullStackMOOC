@@ -7,9 +7,9 @@ patientsRouter.get('', (_req, res) => {
   res.send(patientsService.getSafeEntries());
 });
 
-patientsRouter.post('', (req,_res) =>  {
+patientsRouter.post('', (req,res) =>  {
    patientsService.addEntry(req.body);
-
+  res.json(req.body);
 });
 
 export default patientsRouter;

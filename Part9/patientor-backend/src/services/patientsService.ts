@@ -21,9 +21,9 @@ const getSafeEntries = ():safePatient[]=>{
 };
 
   //this currently does nothing
-  const addEntry = (newpatient: unknown):unknown => {
+  const addEntry = (newpatient: Patient):unknown => {
     console.log(newpatient);
-    
+    patients.push(newpatient);
     return null;
   };
   
