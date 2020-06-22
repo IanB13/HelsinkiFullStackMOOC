@@ -1,5 +1,5 @@
 import patientData from '../data/patients';
-import { Patient , safePatient} from '../types';
+import { Patient , safePatient } from '../types';
 
 const patients:Array<Patient> = patientData;
 
@@ -20,8 +20,10 @@ const getSafeEntries = ():safePatient[]=>{
   return noSSN;
 };
 
-  //this currently does nothin
-  const addEntry = ():null => {
+  //this currently does nothing
+  const addEntry = (newpatient: unknown):unknown => {
+    console.log(newpatient);
+    
     return null;
   };
   
