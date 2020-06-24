@@ -1,5 +1,6 @@
 import patientData from '../data/patients';
 import { Patient , safePatient } from '../types';
+import {toNewPatientEntry} from '../utils';
 
 const patients:Array<Patient> = patientData;
 
@@ -23,7 +24,8 @@ const getSafeEntries = ():safePatient[]=>{
   //this currently does nothing
   const addEntry = (newpatient: Patient):unknown => {
     console.log(newpatient);
-    patients.push(newpatient);
+    const entry = toNewPatientEntry(newpatient);
+    patients.push(entry);
     return null;
   };
   
