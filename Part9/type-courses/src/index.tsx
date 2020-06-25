@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app"
+// for reference
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const App1: React.FC = () => {
   const courseName = "Half Stack application development";
   const courseParts = [
