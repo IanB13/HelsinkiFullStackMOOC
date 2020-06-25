@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-const App: React.FC = () => {
+import App from "./app"
+const App1: React.FC = () => {
   const courseName = "Half Stack application development";
   const courseParts = [
     {
