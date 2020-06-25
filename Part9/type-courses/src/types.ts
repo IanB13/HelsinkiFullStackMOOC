@@ -1,28 +1,31 @@
-export interface Course {
-    name: string;
-    exerciseCount: number;
-}
+
 
 // new types
-export interface CoursePartBase {
+ interface CoursePartBase {
     name: string;
     exerciseCount: number;
   }
+ interface CoursePartDescription extends CoursePartBase {
+  description: string;
+}
   
-  export interface CoursePartOne extends CoursePartBase {
+   interface CoursePartOne extends CoursePartDescription {
     name: "Fundamentals";
-    description: string;
   }
   
-  export interface CoursePartTwo extends CoursePartBase {
+   interface CoursePartTwo extends CoursePartBase {
     name: "Using props to pass data";
     groupProjectCount: number;
   }
   
-  export interface CoursePartThree extends CoursePartBase {
+   interface CoursePartThree extends CoursePartDescription {
     name: "Deeper type usage";
-    description: string;
     exerciseSubmissionLink: string;
   }
+
+   interface CoursePartFour extends CoursePartDescription {
+      name: "cool course";
+   }
   
-  export type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
+  export type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree | CoursePartFour;
+
