@@ -27,7 +27,13 @@ const reducer = (state = initialState, action) => {
       const voteState = state.map(
         anecdote => anecdote.id === action.id ? votedAnectode :anecdote
       )
-      return voteState
+      const sortedState = voteState.sort( (a,b) => b.votes - a.votes)
+      return sortedState
+    case 'ADD_ANECDOTE':
+        console.log(action)
+        const anecdoteObj = asObject(action.anecdote)
+        const newAnecdoteState = state.concat(anecdoteObj)
+        return newAnecdoteState
     default:
       console.log('state now: ', state)
       console.log('action', action)
@@ -41,6 +47,14 @@ export const addVote = (id) =>{
     type: "VOTE",
     id
   }
+}
+
+export const addAnecdote = (anecdote) =>{
+  return{
+    type: "ADD_ANECDOTE",
+    anecdote
+  }
+
 }
 
 export default reducer
