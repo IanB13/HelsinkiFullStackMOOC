@@ -4,12 +4,19 @@ import {addVote} from '../reducers/actions'
 
 
 const AnecdoteList = () => {
-  const anecdotes = useSelector(state => state.filter)
   const dispatch = useDispatch()
 
   const vote = (id,anecdote) => {
     dispatch(addVote(id,anecdote))
   }
+
+  const anecdotes = useSelector(state => {
+    if ( state.filter === [] ) {
+      return state.notes
+    }
+    return state.anecdotes.filter(anecdote => anecdote.content.includes(state.filter))
+
+  })
 
 
   return (
