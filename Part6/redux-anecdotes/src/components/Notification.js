@@ -7,10 +7,11 @@ import {removeNotification} from '../reducers/actions'
 const Notification = () => {
   const dispatch = useDispatch()
   const notification = useSelector(state => state.notifications)
+
   useEffect(()=>{
     setTimeout(()=>{
         dispatch(removeNotification())
-    }, 2000)
+    }, 5000)
 
   // eslint-disable-next-line 
   },[notification])

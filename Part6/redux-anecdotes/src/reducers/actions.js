@@ -4,10 +4,11 @@ export const removeNotification = () => {
     }
 }
 
-export const addVote = (id) => {
+export const addVote = (id,anecdote) => {
     return {
         type: "VOTE",
-        id
+        id,
+        anecdote
     }
 }
 
