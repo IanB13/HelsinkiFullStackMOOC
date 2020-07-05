@@ -7,9 +7,6 @@ const notificationReducer = (state = null, action) => {
       case("REMOVE_NOTIFCIATION"):
       return null
       default:
-        console.error('unhandled action')
-        console.log('state now: ', state)
-        console.log('action', action)
         return state
     }
   }

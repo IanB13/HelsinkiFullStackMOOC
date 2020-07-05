@@ -18,3 +18,11 @@ export const addAnecdote = (anecdote) => {
         anecdote
     }
 }
+
+export const filterAnecdotes = (filter,anecdotes) =>{
+    return{
+        type: "FILTER",
+        filter,
+        anecdotes
+    }
+}
