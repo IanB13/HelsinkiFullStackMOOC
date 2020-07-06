@@ -11,7 +11,8 @@ export const toNewPatientEntry= (obj:any):Patient =>{
         dateOfBirth : parseMiscStr(obj.dateOfBirth),
         ssn: parseMiscStr(obj.ssn),
         gender: parseGender(obj.gender),
-        occupation: parseMiscStr(obj.occupation)
+        occupation: parseMiscStr(obj.occupation),
+        entries:[]
     };
 };
 
