@@ -29,8 +29,19 @@ const getSafeEntries = ():safePatient[]=>{
     return null;
   };
   
+  const getPatient = (id:string):Patient =>{
+    console.log(id);
+    const patient = patients.filter(patient => patient.id === id)[0];
+
+    return({
+      ...patient
+    });
+  };
+
+
   export default {
     getEntries,
     addEntry,
-    getSafeEntries
+    getSafeEntries,
+    getPatient
   };
