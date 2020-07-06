@@ -14,10 +14,24 @@ export const addVote = (id,anecdote) => {
     }
 }
 
+
+const getId = () => (100000 * Math.random()).toFixed(0)
+
+const asObject = (anecdote) => {
+  return {
+    content: anecdote,
+    id: getId(),
+    votes: 0
+  }
+}
+
 export const addAnecdote = (anecdote) => {
-    return {
-        type: "ADD_ANECDOTE",
-        anecdote
+    return async dispatch => {
+         await anecdoteServices.post(asObject(anecdote))
+        dispatch({
+            type: 'ADD_ANECDOTE',
+            anecdote: asObject(anecdote)
+        })
     }
 }
 
@@ -30,12 +44,12 @@ export const filterAnecdotes = (filter,anecdotes) =>{
 }
 
 
-  export const initializeAnecdotes = () => {
+export const initializeAnecdotes = () => {
     return async dispatch => {
-      const anecdotes = await anecdoteServices.getAll()
-      dispatch({
-        type: 'INIT_ANECDOTES',
-        data: anecdotes,
-      })
+        const anecdotes = await anecdoteServices.getAll()
+        dispatch({
+            type: 'INIT_ANECDOTES',
+            data: anecdotes,
+        })
     }
-  }
+}
