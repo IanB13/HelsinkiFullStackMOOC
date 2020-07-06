@@ -15,19 +15,20 @@ export const addVote = (id,anecdote) => {
 }
 
 
-const getId = () => (100000 * Math.random()).toFixed(0)
 
-const asObject = (anecdote) => {
-  return {
-    content: anecdote,
-    id: getId(),
-    votes: 0
-  }
-}
 
 export const addAnecdote = (anecdote) => {
+    const getId = () => (100000 * Math.random()).toFixed(0)
+    const asObject = (anecdote) => {
+        return {
+            content: anecdote,
+            id: getId(),
+            votes: 0
+        }
+    }
+    
     return async dispatch => {
-         await anecdoteServices.post(asObject(anecdote))
+        await anecdoteServices.post(asObject(anecdote))
         dispatch({
             type: 'ADD_ANECDOTE',
             anecdote: asObject(anecdote)

@@ -12,4 +12,9 @@ const post = async (anecdote) =>{
   return response.data
 }
 
+const vote = async(anecdote) =>{
+  
+
+}
+
 export default { getAll,post }
