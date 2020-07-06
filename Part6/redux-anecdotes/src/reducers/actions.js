@@ -1,3 +1,5 @@
+import anecdoteServices from '../services/anecdotes'
+
 export const removeNotification = () => {
     return {
         type: "REMOVE_NOTIFCIATION"
@@ -27,9 +29,13 @@ export const filterAnecdotes = (filter,anecdotes) =>{
     }
 }
 
-export const initializeAnecdotes = (anecdotes) => {
-    return {
-      type: 'INIT_ANECDOTES',
-      data: anecdotes,
+
+  export const initializeAnecdotes = () => {
+    return async dispatch => {
+      const anecdotes = await anecdoteServices.getAll()
+      dispatch({
+        type: 'INIT_ANECDOTES',
+        data: anecdotes,
+      })
     }
   }
