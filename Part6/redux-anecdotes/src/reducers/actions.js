@@ -26,3 +26,10 @@ export const filterAnecdotes = (filter,anecdotes) =>{
         anecdotes
     }
 }
+
+export const initializeAnecdotes = (anecdotes) => {
+    return {
+      type: 'INIT_ANECDOTES',
+      data: anecdotes,
+    }
+  }
