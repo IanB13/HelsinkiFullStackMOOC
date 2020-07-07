@@ -9,12 +9,13 @@ const getEntries = ():Array<Patient> => {
   };
 
 const getSafeEntries = ():safePatient[]=>{
-  const noSSN = patients.map(({id ,name ,dateOfBirth ,gender ,occupation})=>{ return(
+  const noSSN = patients.map(({id ,name ,dateOfBirth ,gender ,occupation,entries})=>{ return(
     {id,
     name,
     dateOfBirth,
     gender,
-    occupation
+    occupation,
+    entries
     }
   );
 });

@@ -22,7 +22,7 @@ export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >;
 
 export type newPatient = Omit<Patient,'id'>;
 
-export type safePatient = Omit<Patient,'ssn'>;
+export type safePatient = Omit<Patient,'ssn' |"entires">;
 
 export enum Gender{
 Male = "male",
