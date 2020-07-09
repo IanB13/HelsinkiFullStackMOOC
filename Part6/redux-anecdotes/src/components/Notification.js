@@ -12,9 +12,8 @@ const Notification = () => {
     setTimeout(()=>{
         dispatch(removeNotification())
     }, 5000)
-
-  // eslint-disable-next-line 
   },[notification])
+  
   const style = {
     border: 'solid',
     padding: 10,

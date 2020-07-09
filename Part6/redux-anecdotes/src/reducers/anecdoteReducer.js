@@ -4,7 +4,10 @@
 const reducer = (state = [], action) => {
   switch(action.type) {
     case 'INIT_ANECDOTES':
-      return action.data
+      console.log(action)
+      const anecdotes = action.data
+      anecdotes.sort( (a,b) => b.votes - a.votes)
+      return anecdotes
     case 'VOTE':
       const foundAnectode = state.filter(anecdote => anecdote.id === action.id)[0] //wil break on duplicate ids
       const votedAnectode = {...foundAnectode, votes:foundAnectode.votes+1}

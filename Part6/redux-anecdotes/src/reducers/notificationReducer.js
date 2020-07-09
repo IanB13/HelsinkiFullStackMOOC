@@ -3,7 +3,7 @@ const notificationReducer = (state = null, action) => {
       case("ADD_ANECDOTE"):
         return `Added ${action.anecdote.content}`
       case("VOTE"):
-      return `you voted '${action.anecdote}' `
+      return `you voted '${action.anecdote.content}' `
       case("REMOVE_NOTIFCIATION"):
       return null
       default:

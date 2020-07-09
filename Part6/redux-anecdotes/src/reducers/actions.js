@@ -1,23 +1,18 @@
 import anecdoteServices from '../services/anecdotes'
 
-export const removeNotification = () => {
-    return {
-        type: "REMOVE_NOTIFCIATION"
-    }
-}
 
 export const addVote = (id) => {
     return async dispatch => {
-    const anecdotesFromDb = await anecdoteServices.getAll()
-    const foundAnectode = anecdotesFromDb.filter(anecdote => anecdote.id === id)[0] //wil break on duplicate ids
-    const votedAnectode = {...foundAnectode, votes:foundAnectode.votes+1}
-    await anecdoteServices.vote(votedAnectode,id)
-    dispatch ({
-        type: "VOTE",
-        id,
-        anecdotes:votedAnectode
-    })
-}
+        const anecdotesFromDb = await anecdoteServices.getAll()
+        const foundAnectode = anecdotesFromDb.filter(anecdote => anecdote.id === id)[0] //wil break on duplicate ids
+        const votedAnectode = {...foundAnectode, votes:foundAnectode.votes+1}
+        await anecdoteServices.vote(votedAnectode,id)
+        dispatch ({
+            type: "VOTE",
+            id,
+            anecdote:votedAnectode
+        })
+    }
 }
 
 
@@ -56,5 +51,22 @@ export const initializeAnecdotes = () => {
             type: 'INIT_ANECDOTES',
             data: anecdotes,
         })
+    }
+}
+
+export const setNotification = (notification,time) =>{
+
+    return async dispatch => {
+dispatch ({
+    type: "REMOVE_NOTIFCIATION"
+        })
+}
+}
+
+
+
+export const removeNotification = () => {
+    return {
+        type: "REMOVE_NOTIFCIATION"
     }
 }
