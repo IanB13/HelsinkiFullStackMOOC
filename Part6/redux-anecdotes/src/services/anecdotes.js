@@ -12,9 +12,11 @@ const post = async (anecdote) =>{
   return response.data
 }
 
-const vote = async(anecdote) =>{
-  
-
+//takes new array of all anecdotes with updated vote count
+const vote = async(newAnecdote,id) =>{
+  console.log(newAnecdote)
+  const response = await axios.put(`${baseUrl}/${id}`,newAnecdote)
+  return response.data
 }
 
-export default { getAll,post }
+export default { getAll,post,vote }

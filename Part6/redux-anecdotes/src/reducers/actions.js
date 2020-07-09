@@ -6,15 +6,19 @@ export const removeNotification = () => {
     }
 }
 
-export const addVote = (id,anecdote) => {
-    return {
+export const addVote = (id) => {
+    return async dispatch => {
+    const anecdotesFromDb = await anecdoteServices.getAll()
+    const foundAnectode = anecdotesFromDb.filter(anecdote => anecdote.id === id)[0] //wil break on duplicate ids
+    const votedAnectode = {...foundAnectode, votes:foundAnectode.votes+1}
+    await anecdoteServices.vote(votedAnectode,id)
+    dispatch ({
         type: "VOTE",
         id,
-        anecdote
-    }
+        anecdotes:votedAnectode
+    })
 }
-
-
+}
 
 
 export const addAnecdote = (anecdote) => {
@@ -44,7 +48,7 @@ export const filterAnecdotes = (filter,anecdotes) =>{
     }
 }
 
-
+//thunk middle ware allows async return 
 export const initializeAnecdotes = () => {
     return async dispatch => {
         const anecdotes = await anecdoteServices.getAll()
