@@ -8,7 +8,6 @@ const AnecdoteForm =() =>{
 
     const add =(event) =>{
         event.preventDefault()
-        console.log(event.target.anecdote.value)
         const anecdote = event.target.anecdote.value
         dispatch(addAnecdote(anecdote))
         event.target.anecdote.value = "" //clears after submit

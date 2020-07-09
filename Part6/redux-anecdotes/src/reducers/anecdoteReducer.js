@@ -4,7 +4,6 @@
 const reducer = (state = [], action) => {
   switch(action.type) {
     case 'INIT_ANECDOTES':
-      console.log(action)
       const anecdotes = action.data
       anecdotes.sort( (a,b) => b.votes - a.votes)
       return anecdotes

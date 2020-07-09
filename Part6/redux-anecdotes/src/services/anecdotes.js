@@ -14,7 +14,6 @@ const post = async (anecdote) =>{
 
 //takes new array of all anecdotes with updated vote count
 const vote = async(newAnecdote,id) =>{
-  console.log(newAnecdote)
   const response = await axios.put(`${baseUrl}/${id}`,newAnecdote)
   return response.data
 }

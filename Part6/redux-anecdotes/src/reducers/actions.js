@@ -55,12 +55,7 @@ export const initializeAnecdotes = () => {
 }
 
 export const setNotification = (notification,time) =>{
-
-    return async dispatch => {
-dispatch ({
-    type: "REMOVE_NOTIFCIATION"
-        })
-}
+        
 }
 
 

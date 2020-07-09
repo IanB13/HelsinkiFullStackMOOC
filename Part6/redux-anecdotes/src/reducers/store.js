@@ -6,7 +6,6 @@ import anecdoteReducer from './anecdoteReducer'
 import notificationReducer from './notificationReducer'
 import filterReducer from './filterReducer'
 
-console.log(notificationReducer)
 const reducer = combineReducers({
   anecdotes: anecdoteReducer,
   notifications: notificationReducer,
