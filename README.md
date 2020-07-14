@@ -4,7 +4,7 @@ Repo for online submission for The University of Helsinki and Houston Inc.  Full
 ## Links to operating web applications:
 
 
-##To Do 
+## To Do 
 Part 6D
 Part 7
 Part 8
