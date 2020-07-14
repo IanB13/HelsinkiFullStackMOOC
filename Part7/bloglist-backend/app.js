@@ -25,6 +25,7 @@ app.use(bodyParser.json())
 app.use(middleware.tokenExtractor)
 //for testing
 if (process.env.NODE_ENV === 'test') {
+  console.log('testing')
   const testingRouter = require('./controllers/testing')
   app.use('/api/testing', testingRouter)
 }

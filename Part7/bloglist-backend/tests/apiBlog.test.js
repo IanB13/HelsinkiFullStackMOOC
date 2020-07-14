@@ -32,7 +32,7 @@ beforeEach(async () =>{
   }
 })
 
-test('notes123 are returned as json', async () => {
+test('notes are returned as json', async () => {
 
   const blog = await api.get('/api/blogs')
     .set("Authorization",outsidetoken)
@@ -84,7 +84,7 @@ test('If title and author are undefined return 400 do not save',async ()=>{
   .expect(400)
 })
 
-test('Delete123 Blog' , async ()=>{
+test('Delete Blog dnwuie7' , async ()=>{
   await api.delete('/api/blogs/5a422aa71b54a666234d17f8')
   .set("Authorization",outsidetoken)
   .expect(204)
