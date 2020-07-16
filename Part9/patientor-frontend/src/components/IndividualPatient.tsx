@@ -18,8 +18,9 @@ const IndividualPatient = () =>{
     useEffect(()=>{
         axios.get(`${apiBaseUrl}/patients/${id}`).then(
             response => changeData(response.data)
-        );
-    },[]);
+        );  
+        //pulls data from api every time, doesn't save data in state
+    },[id]);
 
 
     if(data.loading){
