@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import {Patient, Gender, Entry, HealthCheckRating} from './types';
+import {Patient, Gender, Entry, HealthCheckRating,Discharge} from './types';
 
 
 export const toNewPatientEntry= (obj:any):Patient =>{
@@ -18,11 +18,12 @@ export const toNewPatientEntry= (obj:any):Patient =>{
 
 const parseEntries = (entriesArray: any): Entry[] =>{
   const entries = [];  
+  if(entriesArray){
   for( const entry of entriesArray){
         const checkedEntry = toEntry(entry);
-        entries.push(checkedEntry);
+        entries.push(checkedEntry); // should use a map function here instead
     }
-
+  }
 return (entries);
 };
 
@@ -35,7 +36,6 @@ const toEntry =(entryObj :any): Entry =>{
         description: parseMiscStr(entryObj.description),
         date: parseMiscStr(entryObj.date),
         specialist: parseMiscStr(entryObj.specialist),
-
         healthCheckRating: parseHealthCheckRating(entryObj.healthCheckRating)
       });
       case "Hospital":
@@ -45,6 +45,7 @@ const toEntry =(entryObj :any): Entry =>{
             description: parseMiscStr(entryObj.description),
             date: parseMiscStr(entryObj.date),
             specialist: parseMiscStr(entryObj.specialist),
+            discharge: parseDischarge(entryObj.discharge)
         });
       
       case "OccupationalHealthcare":
@@ -54,6 +55,8 @@ const toEntry =(entryObj :any): Entry =>{
           description: parseMiscStr(entryObj.description),
           date: parseMiscStr(entryObj.date),
           specialist: parseMiscStr(entryObj.specialist),
+          employerName: parseMiscStr(entryObj.employerName)
+          
         });
     default:
       console.log(entryObj.type);
@@ -104,4 +107,11 @@ const parseGender = (gender: any): Gender => {
       throw new Error('Incorrect or missing gender');
   } 
   return gender;
+};
+
+const parseDischarge = (obj:any):Discharge =>{
+  return({
+    criteria: parseMiscStr(obj.criteria),
+    date: parseMiscStr(obj.date)
+  });
 };
