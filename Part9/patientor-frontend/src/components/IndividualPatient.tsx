@@ -21,6 +21,7 @@ const IndividualPatient = () =>{
         );  
         //pulls data from api every time, doesn't save data in state
     },[id]);
+    console.log(data);
 
 
     if(data.loading){

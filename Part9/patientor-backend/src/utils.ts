@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import {Patient, Gender} from './types';
+import {Patient, Gender, Entry, HealthCheckRating} from './types';
 
 
 export const toNewPatientEntry= (obj:any):Patient =>{
@@ -12,16 +12,66 @@ export const toNewPatientEntry= (obj:any):Patient =>{
         ssn: parseMiscStr(obj.ssn),
         gender: parseGender(obj.gender),
         occupation: parseMiscStr(obj.occupation),
-        entries:[]
+        entries: parseEntries(obj.entries)
     };
 };
 
-/* "id": "d2773336-f723-11e9-8f0b-362b9e155667",
-"name": "John McClane",
-"dateOfBirth": "1986-07-09",
-"ssn": "090786-122X",
-"gender": "male",
-"occupation": "New york city cop" */
+const parseEntries = (entriesArray: any): Entry[] =>{
+  const entries = [];  
+  for( const entry of entriesArray){
+        const checkedEntry = toEntry(entry);
+        entries.push(checkedEntry);
+    }
+
+return (entries);
+};
+
+const toEntry =(entryObj :any): Entry =>{
+  switch (entryObj.type) {
+    case "HealthCheck":
+      return({
+        type: "HealthCheck",
+        id: parseMiscStr(entryObj.id),
+        description: parseMiscStr(entryObj.description),
+        date: parseMiscStr(entryObj.date),
+        specialist: parseMiscStr(entryObj.specialist),
+
+        healthCheckRating: parseHealthCheckRating(entryObj.healthCheckRating)
+      });
+      case "Hospital":
+        return({
+            type: "Hospital",
+            id: parseMiscStr(entryObj.id),
+            description: parseMiscStr(entryObj.description),
+            date: parseMiscStr(entryObj.date),
+            specialist: parseMiscStr(entryObj.specialist),
+        });
+      
+      case "OccupationalHealthcare":
+        return({
+          type: "OccupationalHealthcare",
+          id: parseMiscStr(entryObj.id),
+          description: parseMiscStr(entryObj.description),
+          date: parseMiscStr(entryObj.date),
+          specialist: parseMiscStr(entryObj.specialist),
+        });
+    default:
+      console.log(entryObj.type);
+      throw new Error('Incorrect entry type ');
+  }
+};
+
+const isHealthCheckRating = (rating: any): rating is HealthCheckRating =>{
+  return Object.values(HealthCheckRating).includes(rating);
+};
+
+const parseHealthCheckRating = (rating:any): HealthCheckRating =>{
+  if(!isHealthCheckRating(rating)){
+    throw new Error('Incorrect or missing srting');
+  }
+  return rating;
+};
+
 
 const isString = (text: any): text is string => {
     return typeof text === 'string' || text instanceof String;
