@@ -4,15 +4,12 @@ import {
     useParams
   } from "react-router-dom";
 import {apiBaseUrl} from '../constants';
+import {Patient} from '../types';
+
 
 
 const IndividualPatient = () =>{
-    const [data,changeData] = useState({loading:true, id: null,
-        name: null,
-        occupation: null,
-        gender: null,
-        ssn: null,
-        dateOfBirth: null});
+    const [data , changeData] = useState<Patient | undefined >();
 
     const { id } = useParams<{ id: string }>();
     useEffect(()=>{
@@ -24,20 +21,24 @@ const IndividualPatient = () =>{
     console.log(data);
 
 
-    if(data.loading){
+    if(!data){
     return(<div>
        loading...
         </div>);
     }
     else{
-        return(<div>
+        return(
+        <div>
             {data.name} <br/>
             BOB: {data.dateOfBirth} <br/>
             occupation: {data.occupation}
             
+            entry date: {data.entries[0]?.date}
+            <br/>
         </div>);
     }
 
 };
+
 
 export default IndividualPatient;
