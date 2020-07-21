@@ -5,7 +5,7 @@ import {
   } from "react-router-dom";
 import {apiBaseUrl} from '../constants';
 import {Patient} from '../types';
-
+import Entries from './Entries/Entries';
 
 
 const IndividualPatient = () =>{
@@ -18,6 +18,7 @@ const IndividualPatient = () =>{
         );  
         //pulls data from api every time, doesn't save data in state
     },[id]);
+    console.log("patient data is:");
     console.log(data);
 
 
@@ -31,9 +32,9 @@ const IndividualPatient = () =>{
         <div>
             {data.name} <br/>
             BOB: {data.dateOfBirth} <br/>
-            occupation: {data.occupation}
-            
+            occupation: {data.occupation} <br />
             entry date: {data.entries[0]?.date}
+            <Entries  entries =  {data.entries}/>
             <br/>
         </div>);
     }
