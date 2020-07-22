@@ -33,7 +33,6 @@ const IndividualPatient = () =>{
             {data.name} <br/>
             BOB: {data.dateOfBirth} <br/>
             occupation: {data.occupation} <br />
-            entry date: {data.entries[0]?.date}
             <Entries  entries =  {data.entries}/>
             <br/>
         </div>);

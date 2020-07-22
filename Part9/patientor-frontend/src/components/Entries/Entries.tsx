@@ -1,4 +1,7 @@
 import React,{FC} from 'react';
+import OccupationalHealthcare from './OccupationalHealthcare';
+import HealthCheck from './HealthCheck';
+import Hospital from './Hospital';
 
 import {Entry as EntryProps} from "../../types";
 
@@ -9,16 +12,22 @@ return(
        {entries.map(entry => {
         switch (entry.type) {
             case "Hospital":
-            return(<div key = {entry.id}> Hospital </div>);
+            return(<div key = {entry.id}> 
+                <Hospital entry = {entry} />
+             </div>);
             
             case "OccupationalHealthcare":
-            return(<div key = {entry.id}> OccupationalHealthcare </div>);
+            return(<div key = {entry.id}> 
+                <OccupationalHealthcare entry = {entry} />
+                 </div>);
 
             case "HealthCheck":
-            return (<div key = {entry.id}> HealthCheck </div>);
+            return (<div key = {entry.id}> 
+                <HealthCheck entry = {entry} />
+             </div>);
 
             default:
-                break;
+                return null;
        }})}
     </div>
 );
