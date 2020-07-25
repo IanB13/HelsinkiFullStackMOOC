@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {Patient, Gender, Entry, HealthCheckRating,Discharge} from './types';
 
-
 export const toNewPatientEntry= (obj:any):Patient =>{
     return {
         id :` ${Math.floor(Math.random()*10000)}`,
@@ -36,7 +35,8 @@ const toEntry =(entryObj :any): Entry =>{
         description: parseMiscStr(entryObj.description),
         date: parseMiscStr(entryObj.date),
         specialist: parseMiscStr(entryObj.specialist),
-        healthCheckRating: parseHealthCheckRating(entryObj.healthCheckRating)
+        healthCheckRating: parseHealthCheckRating(entryObj.healthCheckRating),
+        diagnosisCodes: parseDiagnosisCodes(entryObj.diagnosisCodes)
       });
       case "Hospital":
         return({
@@ -45,7 +45,8 @@ const toEntry =(entryObj :any): Entry =>{
             description: parseMiscStr(entryObj.description),
             date: parseMiscStr(entryObj.date),
             specialist: parseMiscStr(entryObj.specialist),
-            discharge: parseDischarge(entryObj.discharge)
+            discharge: parseDischarge(entryObj.discharge),
+            diagnosisCodes: parseDiagnosisCodes(entryObj.diagnosisCodes)
         });
       
       case "OccupationalHealthcare":
@@ -55,14 +56,33 @@ const toEntry =(entryObj :any): Entry =>{
           description: parseMiscStr(entryObj.description),
           date: parseMiscStr(entryObj.date),
           specialist: parseMiscStr(entryObj.specialist),
-          employerName: parseMiscStr(entryObj.employerName)
-          
+          employerName: parseMiscStr(entryObj.employerName),
+          diagnosisCodes: parseDiagnosisCodes(entryObj.diagnosisCodes)
         });
     default:
       console.log(entryObj.type);
       throw new Error('Incorrect entry type ');
   }
 };
+
+const isDiagonsisCodes = (codes:any): codes is string[] =>{
+  if(!codes) return false;
+  for(const code of codes){
+      if(!isString(code)){
+        throw new Error('Incorrect or missing srting');
+      }
+  }
+  return true;
+};
+
+const parseDiagnosisCodes =(codes: any):string[]|undefined=>{
+  if(!codes) return undefined;
+  else if(!isDiagonsisCodes(codes)){
+    throw new Error('Incorrect or missing string in diagnosis code');
+  }
+  return codes;
+};
+
 
 const isHealthCheckRating = (rating: any): rating is HealthCheckRating =>{
   return Object.values(HealthCheckRating).includes(rating);
