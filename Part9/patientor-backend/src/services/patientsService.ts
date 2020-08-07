@@ -22,18 +22,16 @@ const getSafeEntries = ():safePatient[]=>{
   return noSSN;
 };
 
-  //this currently does nothing
+
   const addEntry = (newpatient: Patient):unknown => {
     console.log(newpatient);
     const entry = toNewPatientEntry(newpatient);
-    patients.push(entry);
+    patients.push(entry); 
     return null;
   };
   
   const getPatient = (id:string):Patient =>{
-    console.log(id);
     const patient = patients.filter(patient => patient.id === id)[0];
-
     return({
       ...patient
     });
